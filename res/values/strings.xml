@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, ResumeManagerActivity!</string>
+    <string name="app_name">ResumeManager</string>
+    <string name="anmnts">Announcements</string>
+    <string name="no_notes">No Announcements are available Yet</string>
+    <string name="server_error">There is problem in connection from server"</string>
+</resources>
