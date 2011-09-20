@@ -5,12 +5,13 @@
     android:layout_height="fill_parent"
     >
     
-<ListView 	android:id="@id/android:list"
+<ListView 	android:id="@android:id/list"
 			android:layout_width="fill_parent" 
 			android:layout_height="fill_parent">
 </ListView>
 
 <TextView  
+	android:id="@android:id/empty"
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
     android:text="@string/no_notes"

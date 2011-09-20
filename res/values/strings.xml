@@ -5,4 +5,7 @@
     <string name="anmnts">Announcements</string>
     <string name="no_notes">No Announcements are available Yet</string>
     <string name="server_error">There is problem in connection from server"</string>
+    <string name="Announcements">Announcements</string>
+    <string name="Recruiters">Recruiters</string>
+    <string name="Logout">Logout</string>
 </resources>
