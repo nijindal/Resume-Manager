@@ -41,15 +41,15 @@ public class ResumeManagerActivity extends Activity {
 		@Override
 		protected Void doInBackground(Void... params) {
 			System.out.println("in the doInBckground");
-			BackgroundProcess.makeConnection(username, password);
+			output=BackgroundProcess.makeConnection(username, password);
 			//Response = BackgroundProcess.result;
-			// TODO Auto-generated method stub
+			// TODO Auto-generated method stub////
 			return null;
 		}
 
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
-			output = BackgroundProcess.data_received;
+//			output = BackgroundProcess.data_received;
 			System.out.println( "in perform sync" + output);
 			System.out.println("post execute");
 			Intent Announcement = new Intent();

@@ -20,13 +20,11 @@ import android.util.Log;
 public class BackgroundProcess {
 
 	private static String URL;
-	static ArrayList<String> data_received = new ArrayList<String>();
+	
 	static String result[];
 	static int Number_of_stmt = 0;
 
-	public static void makeConnection(String username, String password) {
-		// URL = "http://localhost/authetication_page.php?user=" + username +
-		// "&pass=" + password;
+	public static ArrayList<String> makeConnection(String username, String password) {
 		// Piggyback the connection and socket timeout parameters onto the
 		// HttpPost request
 		// try{
@@ -38,7 +36,9 @@ public class BackgroundProcess {
 		// HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 
 		URL = "http://10.42.43.1/Android/authetication_page.php";
-
+		ArrayList<String> data_received = new ArrayList<String>();
+		data_received.clear();
+		
 		try {
 			System.out.println("reached the background class");
 			HttpClient client = new DefaultHttpClient();
@@ -65,40 +65,72 @@ public class BackgroundProcess {
 				{
 					String receivedCode = "SUCC";
 					Log.d("connection done", "some data received");
-
 					InputStream in = ResponsePost.getEntity().getContent();
 					BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-					StringBuilder str = new StringBuilder();
-					
 					String line = null;
-					int i = 0;
-					try {
-						while ((line = reader.readLine()) != null) {
+					while ((line = reader.readLine()) != null) {
 							data_received.add(line);
-							//str.append(line + "\n");
-							i++;
-//							System.out.print(str);
 							}
 					in.close();
 						// result[0] = str.toString();
 						// System.out.print(result);
 						//System.out.print(result);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
 				}
-			 return;
+				return data_received;
 			 } 
-			
-			else
+		  else
 			{
 				result[0] = "server_error";
-			return;
+				return null;
 			}
-		} catch (Exception e) {
+		}catch (Exception e) {
 			result[0] = "Error";
 			e.printStackTrace();
 		}
-	}
+		return null;
+		
+}
+	
+	public static ArrayList<String> Recruiters_data(){
+		
+		String URL;
+		URL = "http://10.42.43.1/Android/recruiters_list.php";
+		ArrayList<String> recruiters_list = new ArrayList<String>();
+		recruiters_list.clear();
+		
+		try {
+			System.out.println("reached the background class");
+			HttpClient client = new DefaultHttpClient();
+			HttpPost PostRequest = new HttpPost(URL);
+			HttpResponse ResponsePost = client.execute(PostRequest);// connection established actuallly....
+			int Response_code = ResponsePost.getStatusLine().getStatusCode();
+			System.out.println("In recruiters Data" + Response_code);
+
+			if (Response_code == HttpStatus.SC_OK) 
+			{
+				if (ResponsePost.getEntity() != null) 
+				{
+					String receivedCode = "SUCCESS";
+					Log.d("connection done", "some data received");
+					InputStream in = ResponsePost.getEntity().getContent();
+					BufferedReader reader = new BufferedReader(new InputStreamReader(in));		
+					String line = null;
+					
+					while ((line = reader.readLine()) != null) {
+							recruiters_list.add(line);
+					}
+					return recruiters_list;
+				}
+				else
+					return null;
+			}
+			else
+				return null;
+			
+		}catch(Exception ex){
+			ex.printStackTrace();
+			}
+		return null;
+		}
 
 }
