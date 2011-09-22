@@ -18,7 +18,7 @@
 </TextView> 
 
  <ImageView android:id="@+id/NavbarLogo" 
-		 android:layout_width="fill_parent" 
+		 android:layout_width="wrap_content" 
 		 android:layout_height="wrap_content"
 		 android:src="@drawable/tnp_logo"
 		 android:padding="8dp">

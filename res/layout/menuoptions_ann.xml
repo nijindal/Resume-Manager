@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/Refresh_menu_ann"
+          android:icon="@drawable/icon"
+          android:title="@string/Announcements" />
+    <item android:id="@+id/Recruit_menu_ann"
+          android:icon="@drawable/icon"
+          android:title="@string/Recruiters" />
+    <item android:id="@+id/Logout_menu_ann"
+    	  android:icon="@drawable/icon"
+    	  android:title="@string/Logout"	/>
+</menu>

@@ -16,10 +16,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        
+        <activity android:name=".Recruiters"
+                  android:label="@string/recruiters_title">
+        </activity>
         <activity android:name=".AnnouncementsPage"
                   android:label="@string/anmnts">
         </activity>
-        
+
+
+                
     </application>
 </manifest>

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.http.HttpResponse;
@@ -18,13 +19,11 @@ import org.apache.http.message.BasicNameValuePair;
 import android.util.Log;
 
 public class BackgroundProcess {
-
-	private static String URL;
 	
 	static String result[];
 	static int Number_of_stmt = 0;
 
-	public static ArrayList<String> makeConnection(String username, String password) {
+	public static String makeConnection(String username, String password) {
 		// Piggyback the connection and socket timeout parameters onto the
 		// HttpPost request
 		// try{
@@ -35,9 +34,9 @@ public class BackgroundProcess {
 		// int timeoutSocket = 25000;
 		// HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 
-		URL = "http://10.42.43.1/Android/authetication_page.php";
-		ArrayList<String> data_received = new ArrayList<String>();
-		data_received.clear();
+		String URL = "http://10.42.43.1/Android/authetication_page.php";
+		//ArrayList<String> data_received = new ArrayList<String>();
+		//data_received.clear();
 		
 		try {
 			System.out.println("reached the background class");
@@ -63,20 +62,21 @@ public class BackgroundProcess {
 				Log.d("connection done", "in Background process");
 				if (ResponsePost.getEntity() != null) 
 				{
-					String receivedCode = "SUCC";
-					Log.d("connection done", "some data received");
+					Log.d("connection done", "some data rceived");
 					InputStream in = ResponsePost.getEntity().getContent();
 					BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+					StringBuilder result = new StringBuilder();
 					String line = null;
 					while ((line = reader.readLine()) != null) {
-							data_received.add(line);
+							System.out.print("in read line" + line);
+							result.append(line);
 							}
 					in.close();
-						// result[0] = str.toString();
-						// System.out.print(result);
-						//System.out.print(result);
+					String Auth_response = new String(); 
+					Auth_response = result.toString();
+					return Auth_response;
 				}
-				return data_received;
+				return null;
 			 } 
 		  else
 			{
@@ -91,7 +91,82 @@ public class BackgroundProcess {
 		
 }
 	
-	public static ArrayList<String> Recruiters_data(){
+	
+public static ArrayList<Announce> Announcements_data(int number){
+		
+		String URL = "http://10.42.43.1/Android/announcements_page.php";
+		ArrayList<String> Announcements_list = new ArrayList<String>();
+		ArrayList<Announce> Announcements_struct = new ArrayList<Announce>();
+		Announcements_list.clear();
+		
+		
+		try {
+			System.out.println("reached the background class");
+			HttpClient client = new DefaultHttpClient();
+			HttpPost PostRequest = new HttpPost(URL);
+			List<NameValuePair> params = new ArrayList<NameValuePair>();
+	
+			params.add(new BasicNameValuePair("number",new Integer(number).toString()));
+			UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params);
+			PostRequest.setEntity(ent);
+			HttpResponse ResponsePost = client.execute(PostRequest);// connection established actuallly....
+			
+			int Response_code = ResponsePost.getStatusLine().getStatusCode();
+			System.out.println("In Announcememts Retrieval process" + Response_code);
+
+			if (Response_code == HttpStatus.SC_OK) 
+			{
+				if (ResponsePost.getEntity() != null) 
+				{
+					Log.d("connection done", "some data received");
+					InputStream in = ResponsePost.getEntity().getContent();
+					BufferedReader reader = new BufferedReader(new InputStreamReader(in));		
+					String line = null;
+					
+					while ((line = reader.readLine()) != null) {
+							Announcements_list.add(line);
+					}
+					System.out.println("in announcements" + Announcements_list + "size" +Announcements_list.size());
+					Announcements_struct= structure_announcements(Announcements_list);
+					Iterator<Announce> iter = Announcements_struct.iterator(); 
+					System.out.println("in announcements structs" + iter.next().user );
+					return Announcements_struct;
+//					return null;
+				}
+				else
+					return null;
+			}
+			else
+				return null;
+//			
+		}catch(Exception ex){
+			ex.printStackTrace();
+			}
+		return null;
+}
+
+private static ArrayList<Announce> structure_announcements(ArrayList<String> Announcements){
+	
+	ArrayList<Announce> structured_Announcements= new ArrayList<Announce>();
+	Iterator<String> iter = Announcements.iterator();
+//	iter.next();						//first one is always empty....skipping that.....
+	
+	while(iter.hasNext())
+	{
+		Announce temp = new Announce();			//we need fresh memory allocation for all the elements of the arraylist<Announce>..
+		temp.id = iter.next();
+		temp.com_name = iter.next();
+		temp.date = iter.next();
+		temp.time = iter.next();
+		temp.body = iter.next();
+		temp.user = iter.next();
+		structured_Announcements.add(temp);
+	}
+	return structured_Announcements;
+}
+
+	
+public static ArrayList<String> Recruiters_data(){
 		
 		String URL;
 		URL = "http://10.42.43.1/Android/recruiters_list.php";
@@ -110,8 +185,7 @@ public class BackgroundProcess {
 			{
 				if (ResponsePost.getEntity() != null) 
 				{
-					String receivedCode = "SUCCESS";
-					Log.d("connection done", "some data received");
+					Log.d("connection done", "some data rceived");
 					InputStream in = ResponsePost.getEntity().getContent();
 					BufferedReader reader = new BufferedReader(new InputStreamReader(in));		
 					String line = null;

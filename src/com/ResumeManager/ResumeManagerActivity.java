@@ -37,11 +37,11 @@ public class ResumeManagerActivity extends Activity {
 
 	private class PerformAsync extends AsyncTask<Void, Void, Void> {
 
-		ArrayList<String> output;
+		String response;
 		@Override
 		protected Void doInBackground(Void... params) {
 			System.out.println("in the doInBckground");
-			output=BackgroundProcess.makeConnection(username, password);
+			response = BackgroundProcess.makeConnection(username, password);
 			//Response = BackgroundProcess.result;
 			// TODO Auto-generated method stub////
 			return null;
@@ -50,11 +50,11 @@ public class ResumeManagerActivity extends Activity {
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
 //			output = BackgroundProcess.data_received;
-			System.out.println( "in perform sync" + output);
-			System.out.println("post execute");
+			if(response.equals("SUCCESS"))		//autheticated
+				System.out.println( "in post execute" + response);
 			Intent Announcement = new Intent();
 			Announcement.setClassName("com.ResumeManager","com.ResumeManager.AnnouncementsPage");
-			Announcement.putStringArrayListExtra("announcements", output);
+//			Announcement.putStringArrayListExtra("announcements", output);
 			startActivity(Announcement);
 			
 		}

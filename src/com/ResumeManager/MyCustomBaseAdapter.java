@@ -38,10 +38,10 @@ public class MyCustomBaseAdapter extends BaseAdapter {
 	  ViewHolder holder;
 	  Log.d("My Custom","getview");
 	  if (convertView == null) {
-	   convertView = mInflater.inflate(R.layout.rowtext, null);
+	   convertView = mInflater.inflate(R.layout.row_announce, null);
 	   holder = new ViewHolder();
 	   holder.company = (TextView) convertView.findViewById(R.id.com_name);
-	   holder.Announcement = (TextView) convertView.findViewById(R.id.announce);
+//	   holder.Announcement = (TextView) convertView.findViewById(R.id.announce);
 	   convertView.setTag(holder);
 	  } 
 	  
