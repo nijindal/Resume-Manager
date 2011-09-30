@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
- 
-
-<LinearLayout
+ <LinearLayout
    xmlns:android="http://schemas.android.com/apk/res/android"
    android:orientation="vertical"
    android:layout_width="fill_parent"
    android:layout_height="fill_parent">
- 
  
 <TextView android:text="Resume Manager"
 		android:id="@+id/rm"
@@ -17,17 +14,10 @@
 		android:textStyle="bold">
 </TextView> 
 
- <ImageView android:id="@+id/NavbarLogo" 
-		 android:layout_width="wrap_content" 
-		 android:layout_height="wrap_content"
-		 android:src="@drawable/tnp_logo"
-		 android:padding="8dp">
-</ImageView>
-
-    
-    <View android:layout_width="fill_parent"
+<View android:layout_width="fill_parent"
 	  android:layout_height="2dp"
-	  android:background="#111111"></View>
+	  android:background="#111111">
+</View>
  
 <View android:layout_width="fill_parent"
 	  android:layout_height="20dp"
@@ -38,8 +28,8 @@
 		     android:hint="UserID"
              android:layout_height="wrap_content"
              android:padding="10dp"
-             android:layout_width="250px"
-             android:layout_gravity="center_vertical|center_horizontal|center"
+             android:layout_width="150px"
+             android:layout_gravity="center"
              android:singleLine="true" />
              
 <EditText android:id="@+id/txt_password"
@@ -47,8 +37,8 @@
              android:password="true"
              android:padding="10dp"
              android:layout_height="wrap_content"
-             android:layout_width="250px"
-             android:layout_gravity="center_vertical|center_horizontal|center"
+             android:layout_width="150px"
+             android:layout_gravity="center"
              android:singleLine="true" />
    
 <Button android:id="@+id/login_button"

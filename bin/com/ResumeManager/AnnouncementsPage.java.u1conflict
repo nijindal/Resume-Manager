@@ -1,0 +1,82 @@
+package com.ResumeManager;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import android.app.ListActivity;
+import android.os.Bundle;
+import android.util.Log;
+
+
+//Announcement Page it is........
+public class AnnouncementsPage extends ListActivity {
+	
+	public ArrayList<String> Announcements;
+	public static ArrayList<info> structured_Announcements = new ArrayList<info>();
+	@Override
+	public void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.mainpage);
+		Log.d("in on of create","Announcements");
+		Announcements = getIntent().getStringArrayListExtra("announcements");
+		//String rand = new Integer((Announcements.size())).toString();
+		String rand = Announcements.get(0);
+		Log.d("in on create",rand);
+		structure_data();					//structure the data obtained in arraylist<String>.....								
+		show_data();						//Just for dubugging purpose......
+		fill_data();						//Fill Data in the rows of the Android ListView.....
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.game_menu, menu);
+	    return true;
+	}
+	
+	//Structure the data present in the string arraylist to the arraylist<info>, where info class provides the structure
+	//for the data available to be shown in each structure
+	public void structure_data(){		
+		Iterator<String> iter = Announcements.iterator();
+		iter.next();
+		while(iter.hasNext())
+		{
+			//Log.d("has next","strutct");
+			//iter.next();
+			info temp = new info();
+			temp.company = iter.next();
+				
+				if(iter.hasNext())
+				{
+					temp.Announcement = iter.next();
+					Log.d(temp.company,temp.Announcement);
+					structured_Announcements.add(temp);
+					
+				}
+		}
+	}
+	
+	public void show_data(){
+		Iterator<info> iter = structured_Announcements.iterator();
+		info temp = new info();
+		Log.d("show data","showing");
+		while(iter.hasNext())
+		{
+//			Log.d("has next","struct");
+			//iter.next();
+				temp = iter.next();
+				Log.d(temp.company,temp.Announcement);
+		}
+		
+	}
+	
+	public void fill_data(){
+
+//		ListView lv = (ListView) findViewById(R.layout.mainpage);
+		
+		//Log.d("filldata",structured_Announcements.toString());
+		setListAdapter(new MyCustomBaseAdapter(this, structured_Announcements));
+
+	}
+}

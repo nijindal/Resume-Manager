@@ -13,12 +13,15 @@ public class MyCustomAnnounceCursorAdap extends SimpleCursorAdapter {
 
 	Cursor cursor;
 	LayoutInflater inflator;
-	public MyCustomAnnounceCursorAdap(Context context, Cursor c) {
-		super(context, 0, c, null, null);
+	String[] from;
+	int[] to;
+	public MyCustomAnnounceCursorAdap(Context context, int layout, Cursor c,String[] from , int[] to ) {
+		super(context, 0, c, from, to);
 		Log.d("custom","constructor");
 		cursor = c;
 		inflator = LayoutInflater.from(context);
-		// TODO Auto-generated constructor stub
+		this.from = from;
+		this.to = to;
 	}
 
 	@Override
@@ -28,23 +31,23 @@ public class MyCustomAnnounceCursorAdap extends SimpleCursorAdapter {
 		ViewBundle bundle = new ViewBundle();
 		Announce data = new Announce();
 		
-		bundle.com_name = (TextView)view.findViewById(R.id.com_name);
-		bundle.date = (TextView)view.findViewById(R.id.date);
-		bundle.time = (TextView)view.findViewById(R.id.time);
-		bundle.body = (TextView)view.findViewById(R.id.body);
-		bundle.user = (TextView)view.findViewById(R.id.user);
+		bundle.com_name = (TextView)view.findViewById(to[0]);
+		bundle.date = (TextView)view.findViewById(to[1]);
+		bundle.time = (TextView)view.findViewById(to[2]);
+		bundle.body = (TextView)view.findViewById(to[3]);
+		bundle.user = (TextView)view.findViewById(to[4]);
 	
-		data.com_name = cursor.getString(1);
-		data.date = cursor.getString(2);
-		data.time = cursor.getString(3);
-		data.body = cursor.getString(4);
-		data.user = cursor.getString(5);
+		data.com_name = cursor.getString(cursor.getColumnIndex(from[0]));
+		data.date = cursor.getString(cursor.getColumnIndex(from[1]));
+		data.time = cursor.getString(cursor.getColumnIndex(from[2]));
+		data.body = cursor.getString(cursor.getColumnIndex(from[3]));
+		data.user = cursor.getString(cursor.getColumnIndex(from[4]));
 		
-		bundle.com_name.setText(data.com_name);
-		bundle.date.setText(data.date);
-		bundle.time.setText(data.time);
-		bundle.body.setText(data.body);
-		bundle.user.setText(data.user);
+		setViewText(bundle.com_name, data.com_name);
+		setViewText(bundle.date, data.date);
+		setViewText(bundle.time,data.time);
+		setViewText(bundle.body,data.body);
+		setViewText(bundle.user,data.user);
 	
 	}
 	

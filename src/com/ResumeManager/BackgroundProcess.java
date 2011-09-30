@@ -146,6 +146,8 @@ public static ArrayList<Announce> Announcements_data(int number){
 }
 
 private static ArrayList<Announce> structure_announcements(ArrayList<String> Announcements){
+
+	
 	
 	ArrayList<Announce> structured_Announcements= new ArrayList<Announce>();
 	Iterator<String> iter = Announcements.iterator();
@@ -166,15 +168,16 @@ private static ArrayList<Announce> structure_announcements(ArrayList<String> Ann
 }
 
 	
-public static ArrayList<String> Recruiters_data(){
+public static ArrayList<Recruiter_struct> Recruiters_data(){
 		
 		String URL;
 		URL = "http://10.42.43.1/Android/recruiters_list.php";
 		ArrayList<String> recruiters_list = new ArrayList<String>();
+		ArrayList<Recruiter_struct> recruit_struct;
 		recruiters_list.clear();
 		
 		try {
-			System.out.println("reached the background class");
+			System.out.println("reached the background class of recruiters");
 			HttpClient client = new DefaultHttpClient();
 			HttpPost PostRequest = new HttpPost(URL);
 			HttpResponse ResponsePost = client.execute(PostRequest);// connection established actuallly....
@@ -193,7 +196,12 @@ public static ArrayList<String> Recruiters_data(){
 					while ((line = reader.readLine()) != null) {
 							recruiters_list.add(line);
 					}
-					return recruiters_list;
+
+					System.out.println("in recruiters" + recruiters_list + "size" + recruiters_list.size());
+
+					recruit_struct = structure_recruiters(recruiters_list);
+					 
+					return recruit_struct;
 				}
 				else
 					return null;
@@ -207,4 +215,61 @@ public static ArrayList<String> Recruiters_data(){
 		return null;
 		}
 
+static public ArrayList<Recruiter_struct> structure_recruiters(ArrayList<String> recruiters){
+	
+	ArrayList<Recruiter_struct> recruit_struct = new ArrayList<Recruiter_struct>();
+	recruit_struct.clear();
+	Iterator<String> Iter = recruiters.iterator();
+
+	while(Iter.hasNext())
+	{
+		Recruiter_struct temp = new Recruiter_struct();
+		temp.id = Iter.next();
+		temp.grade = Iter.next();
+		temp.rec_name = Iter.next();
+		temp.date = Iter.next();
+		temp.eligibilty = Iter.next();
+		assign_details(temp, Iter);
+		System.out.print("in strucutring" + temp);
+		recruit_struct.add(temp);
+	}
+	return recruit_struct;
 }
+
+static public void assign_details(Recruiter_struct temp, Iterator<String> Iter ){
+	Log.d("in assign", "details to");
+	String[] paritions = temp.eligibilty.split(" ");
+	int size = paritions.length;
+	
+	int i;
+	for(i=0;i<size;i++)
+	{
+	if(paritions[i].equals("BE"))
+		{
+		Log.d("BE","assign");
+		temp.branches_be = Iter.next();
+		temp.pkg_be = Iter.next();
+		temp.cutoff_be = Iter.next();
+		}
+	else if(paritions[i].equals("ME"))
+		{
+		Log.d("ME","assign");
+		temp.branches_me = Iter.next();
+		temp.pkg_me = Iter.next();
+		temp.cutoff_me = Iter.next();
+		System.out.print("Assignment is correct or not" + temp.branches_me);
+		}
+		
+	else if(paritions[i].equals("INTERN"))
+		{
+		Log.d("INTERN","assign");
+		temp.branches_intern = Iter.next();
+		temp.pkg_intern = Iter.next();
+		temp.cutoff_intern = Iter.next();
+	}
+	}
+
+  }
+
+}
+

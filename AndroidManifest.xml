@@ -21,8 +21,12 @@
                   android:label="@string/recruiters_title">
         </activity>
         <activity android:name=".AnnouncementsPage"
-                  android:label="@string/anmnts">
+                  android:label="@string/announcements_title">
         </activity>
+        
+        <activity android:name=".Recruiter_detail"
+                  android:label="">
+        </activity>        
 
 
                 

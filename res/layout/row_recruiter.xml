@@ -1,8 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView android:id="@+id/recruit_name"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/header"
+ 	android:orientation="vertical" 
+ 	android:layout_width="fill_parent"
+ 	android:layout_height="fill_parent">
+
+<TextView android:id="@+id/rec_name"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+	android:gravity="left"
     android:textStyle="bold"
-    android:textSize="15sp">
-</TextView>
+    android:textSize="25sp">
+</TextView>  
+
+<TextView android:id="@+id/visiting_on"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		android:layout_below="@id/rec_name"
+        android:textSize="15sp"
+        android:gravity="left"
+        android:text="Visiting On: "/>
+
+
+<TextView android:id="@+id/date_rec"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+		android:layout_below="@id/rec_name"
+		android:layout_toRightOf="@id/visiting_on"
+    	android:textSize="15sp"
+        android:gravity="left"/>
+
+<TextView android:id="@+id/eligibility"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		android:layout_below="@id/visiting_on"
+        android:textSize="15sp"
+        android:gravity="left"
+        android:text="Eligibility "/>
+        
+ <TextView android:id="@+id/branches_be"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+		android:layout_below="@id/date_rec"
+		android:layout_toRightOf="@id/eligibility"
+		android:textStyle="bold"
+		android:textSize="15sp"/>
+
+<TextView android:id="@+id/branches_me"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/branches_be"
+		android:textStyle="bold"
+		android:gravity="left"
+        android:textSize="15sp"/>
+
+<TextView android:id="@+id/branches_intern"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+		android:layout_toRightOf="@id/branches_me"
+		android:layout_marginLeft="5sp"
+		android:textStyle="bold"
+        android:textSize="25sp"
+        android:gravity="right"/>
+        
+
+</RelativeLayout>

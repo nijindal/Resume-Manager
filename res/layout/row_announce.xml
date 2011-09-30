@@ -16,8 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@id/com_name"
-        android:layout_marginLeft="10dip"
-    	android:textSize="15sp"
+    	android:textSize="12.5sp"
         android:gravity="right"/>
 
 <TextView android:id="@+id/time"
@@ -26,8 +25,7 @@
         android:layout_below="@id/date"
         android:layout_toRightOf="@id/com_name"
         android:layout_alignParentRight="true"
-        android:layout_marginLeft="10dip"
-        android:textSize="15sp"
+        android:textSize="12.5sp"
         android:gravity="right"/>
 
 <TextView android:id="@+id/body"

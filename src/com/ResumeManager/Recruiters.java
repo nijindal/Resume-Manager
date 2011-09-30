@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,18 +12,25 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.SimpleCursorAdapter;
 
 public class Recruiters extends ListActivity {
 
 	public ArrayList<String> recruiters = new ArrayList<String>();
+	private ArrayList<Recruiter_struct> recruiters_list = new ArrayList<Recruiter_struct>();
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
-	Log.d("in on create","without any data");
-	super.onCreate(savedInstanceState);
-	setContentView(R.layout.mainpage);
-	recruiters = getIntent().getStringArrayListExtra("recruiters");
-	fill_data();
+		Log.d("in on create","Recruiters");
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.recruiters_page);
+		refresh_list();
+	
+	}
+	
+	void refresh_list(){
+		new Retrieve_recruiters().execute();
 	}
 	
 	@Override
@@ -55,21 +63,31 @@ public class Recruiters extends ListActivity {
 		}
 	}
 	
-	public void fill_data()
-	{
-		Log.d("fill data","recruiters");
-		String[] recruits = new String[recruiters.size()];
-		recruits = (String[])recruiters.toArray(recruits);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.row_recruiter,recruits);
-		setListAdapter(adapter);	
+	void save_to_db(){
+		
+		Recruitersdb recruiters_db = new Recruitersdb(this, recruiters_list);
+		recruiters_db.add_new_to_db();
+		Cursor data_db = recruiters_db.fetch_all();
+		
+		startManagingCursor(data_db);
+  
+		String[] from = new String[] {Recruitersdb.grade,Recruitersdb.rec_name,Recruitersdb.date,Recruitersdb.eligibilty,
+				Recruitersdb.branches_be,Recruitersdb.pkg_be, Recruitersdb.cutoff_be,
+				Recruitersdb.branches_me,Recruitersdb.pkg_me, Recruitersdb.cutoff_me,
+				Recruitersdb.branches_intern, Recruitersdb.pkg_intern, Recruitersdb.cutoff_intern};
+
+		int[] to = new int[] {R.id.rec_name, R.id.date_rec, R.id.branches_be, R.id.branches_me, R.id.branches_intern};
+
+		MyCustomRecruitCursor adapter = new MyCustomRecruitCursor(this, R.layout.row_recruiter,data_db,from,to);
+		setListAdapter(adapter);
 	}
 	
 	private class Retrieve_recruiters extends AsyncTask<Void,Void,Void>{
 
-		ArrayList<String> recruiters_list = new ArrayList<String>();
+
 		@Override
 		protected Void doInBackground(Void... params) {
-			Log.d("in background","going to recruiters");
+			Log.d("in background","recru iters");
 			recruiters_list = BackgroundProcess.Recruiters_data();
 			// TODO Auto-generated method stub
 			return null;
@@ -79,13 +97,7 @@ public class Recruiters extends ListActivity {
 		{
 			Log.d("onpostexecute","announcement");
 			super.onPostExecute(result);
-			Intent to_recruiters = new Intent();
-			
-			to_recruiters.setClassName("com.ResumeManager","com.ResumeManager.Recruiters");
-			to_recruiters.putStringArrayListExtra("recruiters", recruiters_list);
-			startActivity(to_recruiters);
-
-			
+			save_to_db();
 		}
 	}
 }
