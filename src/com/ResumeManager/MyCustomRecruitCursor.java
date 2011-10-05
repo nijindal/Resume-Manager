@@ -93,9 +93,11 @@ public class MyCustomRecruitCursor extends SimpleCursorAdapter {
 			
 				AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 				builder.setTitle("Hey....it worked");
+
 				Intent to_details = new Intent();
 				to_details.setClassName("com.ResumeManager", "com.ResumeManager.Recruiter_detail");
-				startActivity(to_details);
+				ctx.startActivity(to_details);
+				
 //				builder.setItems(items, new DialogInterface.OnClickListener() {
 //					public void onClick(DialogInterface dialog, int item) {
 //
@@ -119,6 +121,11 @@ public class MyCustomRecruitCursor extends SimpleCursorAdapter {
 	
 	}
 	
+//	public void gotodetails(){
+//	
+
+//
+//	}
 	
 	public void check_branches(String eligibility){
 		

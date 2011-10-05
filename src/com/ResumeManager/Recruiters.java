@@ -80,6 +80,7 @@ public class Recruiters extends ListActivity {
 
 		MyCustomRecruitCursor adapter = new MyCustomRecruitCursor(this, R.layout.row_recruiter,data_db,from,to);
 		setListAdapter(adapter);
+		Log.d("back to save to db","recriters");
 	}
 	
 	private class Retrieve_recruiters extends AsyncTask<Void,Void,Void>{

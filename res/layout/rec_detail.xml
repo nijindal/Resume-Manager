@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+			android:id="@+id/ScrollView01"
+	 		android:layout_width="fill_parent" 
+			android:layout_height="fill_parent">
+			
+<RelativeLayout android:id="@+id/detail"
+ 	android:orientation="vertical" 
+ 	android:layout_width="fill_parent"
+ 	android:layout_height="fill_parent">
+ 	
+<ImageView android:id="@+id/Logo" 
+		 android:layout_width="wrap_content" 
+		 android:layout_height="wrap_content"
+		 android:src="@drawable/s"
+		 android:padding="8dp">
+</ImageView>	
+ 	
+<TextView android:id="@+id/recruiter"
+    android:layout_width="fill_parent"
+    android:layout_height="50px"
+	android:gravity="left"
+    android:textStyle="bold"
+    android:paddingTop="10px"
+    android:paddingLeft="10px"
+    android:layout_toRightOf="@+id/Logo"
+    android:textSize="25sp"/>
+    
+ <Button
+ 	 android:id="@+id/sub_button"
+     android:layout_height="wrap_content"
+     android:layout_width="wrap_content"
+     android:layout_below="@+id/Logo"
+     android:gravity="center"
+     android:text="Submit Form"/>
+    
+    
+<TextView android:id="@+id/Description"
+    android:layout_width="fill_parent"
+    android:layout_height="20px"
+	android:gravity="left"
+	android:clickable="true"
+	android:onClick="onClick"
+	android:layout_below="@+id/sub_button"
+    android:textSize="17.5px"
+    android:text="Description"></TextView>
+    
+<TextView android:id="@+id/rec_desc"
+    android:layout_width="fill_parent"
+    android:layout_height="20px"
+	android:gravity="left"
+	android:clickable="true"
+	android:onClick="onClick"
+	android:layout_below="@+id/Description"
+    android:textSize="12.5px"
+    android:text="Qualcomm offers exciting opportunites for fresh graduates. Opportunities are open in 3 profiles: 1) Software 2) ECE/ Communication ( DSP, Communication systems – Majorly software related work with mix of Communications) 3) Hardware ( Digital Design, VLSI, Verification, Validation) Software: Complex wireless devices are only as powerful as the software that runs them. You’ll develop, implement and maintain multimedia, gaming and application software for the world’s leading-edge mobile devices. Selected students will work in any of the teams mentioned below: 1) Linux/ Android/ kernel / LIMO 2) Multimedia Development (Audio, Video, Graphics) 3) Brew MP 4) 1x Data Team 5) Bluetooth SW Development Team 6) Winmobile SW Development ECE/ Communication: 
+    Qualcomm  is the world's largest provider of wireless chipset and software technology, which powers the
+    majority of all commercially available 3G devices today. Here, we are redefining the mobile experience by applying our unmatched legacy of wireless innovation to enable new generations of increasingly powerful mobile handsets, computers and consumer electronics devices. Selected students will work in any of the teams mentioned below: 1) Digital Signal Processing 2) Modem Development Team 3) RF SW Development and Testing Team 4) System Test Team 5) WLAN and Bluetooth Development and Testing Teams 6) System Test Engineering Teams VLSI/ Hardware: The world’s wireless devices are shrinking at incredible r
+    ates and you’ll be tasked to design the next warp-speed processor, minute circuit or ultra-low-power radio that makes Qualcomm a global leader in wireless technology. Selected students will be working in any of the teams mentioned below: 1) Digital Design 2)">
+</TextView>
+
+<TextView android:id="@+id/visiting_on"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+	android:gravity="left"
+	android:clickable="true"
+	android:onClick="onClick"
+	android:layout_below="@+id/rec_desc"
+    android:textSize="17.5px"
+    android:text="Visitng On"></TextView>
+
+<TextView android:id="@+id/visiting_date"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+	android:gravity="left"
+	android:clickable="true"
+	android:onClick="onClick"
+	android:layout_below="@+id/visiting_on"
+    android:textSize="12.5px"></TextView>
+    
+ <TextView android:id="@+id/cutoff"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+	android:gravity="left"
+	android:layout_below="@+id/visiting_date"
+    android:textSize="17.5px"
+    android:text="CutOff"></TextView>
+    
+ <TextView android:id="@+id/cutoff_data"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+	android:gravity="left"
+	android:clickable="true"
+	android:onClick="onClick"
+	android:layout_below="@+id/cutoff"
+    android:textSize="12.5px"></TextView>
+
+ <TextView android:id="@+id/ctc"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+	android:gravity="left"
+	android:layout_below="@+id/cutoff_data"
+    android:textSize="17.5px"
+    android:text="CTC"></TextView>
+    
+ <TextView android:id="@+id/ctc_data"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+	android:gravity="left"
+	android:clickable="true"
+	android:onClick="onClick"
+	android:layout_below="@+id/ctc"
+    android:textSize="12.5px"/>
+        
+ <TextView android:id="@+id/job_desc"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+	android:gravity="left"
+	android:layout_below="@+id/ctc_data"
+    android:textSize="17.5px"
+    android:text="Job Description"></TextView>
+    
+ <TextView android:id="@+id/job_desc_data"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+	android:gravity="left"
+	android:clickable="true"
+	android:onClick="onClick"
+	android:layout_below="@+id/job_desc"
+    android:textSize="12.5px"/>
+
+
+</RelativeLayout>
+
+</ScrollView>

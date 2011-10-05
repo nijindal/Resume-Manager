@@ -18,6 +18,8 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 public class BackgroundProcess {
 	
 	static String result[];
@@ -96,6 +98,7 @@ public static ArrayList<Announce> Announcements_data(int number){
 		
 		String URL = "http://10.42.43.1/Android/announcements_page.php";
 		ArrayList<String> Announcements_list = new ArrayList<String>();
+		Announce_struct list;
 		ArrayList<Announce> Announcements_struct = new ArrayList<Announce>();
 		Announcements_list.clear();
 		
@@ -113,12 +116,14 @@ public static ArrayList<Announce> Announcements_data(int number){
 			
 			int Response_code = ResponsePost.getStatusLine().getStatusCode();
 			System.out.println("In Announcememts Retrieval process" + Response_code);
-
+			
+			
 			if (Response_code == HttpStatus.SC_OK) 
 			{
 				if (ResponsePost.getEntity() != null) 
 				{
 					Log.d("connection done", "some data received");
+					StringBuilder str_rcvd = new StringBuilder();
 					InputStream in = ResponsePost.getEntity().getContent();
 					BufferedReader reader = new BufferedReader(new InputStreamReader(in));		
 					String line = null;
@@ -271,5 +276,55 @@ static public void assign_details(Recruiter_struct temp, Iterator<String> Iter )
 
   }
 
+static public Rec_details get_recruiter_details(int company_id){
+	
+	String URL = "http://10.42.43.1/Android/recruiter_detail.php";
+	Rec_details array;
+	try {
+		System.out.println("reached the recruiter details background class");
+		HttpClient client = new DefaultHttpClient();
+		HttpPost PostRequest = new HttpPost(URL);
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+
+		params.add(new BasicNameValuePair("company_id", new Integer(company_id).toString()));
+
+		UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params);
+		PostRequest.setEntity(ent);
+
+		HttpResponse ResponsePost = client.execute(PostRequest);// connection
+																// established
+																// actuallly....
+		int Response_code = ResponsePost.getStatusLine().getStatusCode();
+
+		System.out.println("After the request" + Response_code);
+
+		if (Response_code == HttpStatus.SC_OK) 
+		{
+			Log.d("connection done", "in Background process");
+			if (ResponsePost.getEntity() != null) 
+			{
+				Log.d("connection done", "JSON  IS RECIEVED");
+				InputStream in = ResponsePost.getEntity().getContent();
+				BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+				String string_rcvd = reader.readLine();
+				Gson gson = new Gson();
+				array = gson.fromJson(string_rcvd, Rec_details.class);
+				if(array.com_name == "")
+					Log.d("the company name is nulll revd","checked it just now");
+				else
+					Log.d(array.job_desc,array.com_id);
+				return array;
+			}	
+				
+			return null;
+	
+		}
+	}catch(Exception ex)
+	{
+		ex.printStackTrace();
+	}
+	return null;
+  }
 }
+
 
