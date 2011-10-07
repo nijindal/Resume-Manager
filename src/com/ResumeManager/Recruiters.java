@@ -71,13 +71,15 @@ public class Recruiters extends ListActivity {
 		
 		startManagingCursor(data_db);
   
-		String[] from = new String[] {Recruitersdb.grade,Recruitersdb.rec_name,Recruitersdb.date,Recruitersdb.eligibilty,
+		String[] from = new String[] {Recruitersdb.grade,Recruitersdb.rec_name,Recruitersdb.date,
 				Recruitersdb.branches_be,Recruitersdb.pkg_be, Recruitersdb.cutoff_be,
 				Recruitersdb.branches_me,Recruitersdb.pkg_me, Recruitersdb.cutoff_me,
 				Recruitersdb.branches_intern, Recruitersdb.pkg_intern, Recruitersdb.cutoff_intern};
 
 		int[] to = new int[] {R.id.rec_name, R.id.date_rec, R.id.branches_be, R.id.branches_me, R.id.branches_intern};
+//		int[] to = new int[] {R.id.rec_name, R.id.date_rec};
 
+		
 		MyCustomRecruitCursor adapter = new MyCustomRecruitCursor(this, R.layout.row_recruiter,data_db,from,to);
 		setListAdapter(adapter);
 		Log.d("back to save to db","recriters");

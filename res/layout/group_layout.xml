@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout android:id="@+id/linear_parent"
+        android:layout_width="fill_parent" android:layout_height="45dip"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+<TextView android:id="@+id/tvGroup" android:layout_width="fill_parent"
+        android:layout_height="30dip" 
+        android:text="Groups" 
+        android:paddingLeft="35px" 
+        android:paddingRight="35px"
+        android:textSize="17.5px"></TextView>
+</LinearLayout>

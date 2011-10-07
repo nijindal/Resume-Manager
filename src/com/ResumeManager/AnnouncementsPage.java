@@ -3,6 +3,7 @@ package com.ResumeManager;
 import java.util.ArrayList;
 
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
@@ -17,6 +18,7 @@ import android.widget.SimpleCursorAdapter;
 //Announcement Page it is........
 public class AnnouncementsPage extends ListActivity {
 	
+	ProgressDialog pleaseWait;
 	public ArrayList<String> Announcements;
 	public ArrayList<info> structured_Announcements = new ArrayList<info>();
 	ArrayList<Announce> announce_list = new ArrayList<Announce>();
@@ -27,11 +29,8 @@ public class AnnouncementsPage extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mainpage);
 		Log.d("in on of create","Announcements");
-//		Announcements = getIntent().getStringArrayListExtra("announcements");
 		refresh_list();
-//		structure_data();					//structure the data obtained in arraylist<String>.....								
-//		show_data();						//Just for dubugging purpose......
-//		fill_data();						//Fill Data in the rows of the Android ListView.....
+
 	}
 	
 	public void refresh_list(){

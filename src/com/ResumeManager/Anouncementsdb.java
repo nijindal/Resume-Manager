@@ -31,11 +31,10 @@ public class Anouncementsdb extends SQLiteOpenHelper{
 	date + " TEXT NOT NULL," + time + " TEXT NOT NULL," + body + " TEXT NOT NULL," + user +" TEXT NOT NULL);";
 	
 	public static String CREATE_TABLE_RECRUIT = "CREATE TABLE "+ Recruitersdb.recruiters_table + " ( _id INTEGER PRIMARY KEY AUTOINCREMENT, "
-
+	
 	+ Recruitersdb.grade + " TEXT NOT NULL, "
 	+ Recruitersdb.rec_name + " TEXT NOT NULL," 
 	+ Recruitersdb.date + " TEXT NOT NULL," 
-	+ Recruitersdb.eligibilty + " TEXT NOT NULL," 
 	+ Recruitersdb.branches_be +" TEXT, " 
 	+ Recruitersdb.branches_me +" TEXT, "
 	+ Recruitersdb.branches_intern +" TEXT, "

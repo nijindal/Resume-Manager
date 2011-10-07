@@ -21,8 +21,8 @@ public class Recruitersdb extends SQLiteOpenHelper {
 	final static String unique_id="_id";
 	final static String grade="grade";
 	final static String date="date";
-	final static String eligibilty="eligibilty";
-	final static String branches_be="branches_be";
+	final static String branches_be="branches_be";	
+
 	final static String branches_me="branches_me";
 	final static String branches_intern="branches_intern";
 	final static String pkg_be="pkg_be";
@@ -36,7 +36,7 @@ public class Recruitersdb extends SQLiteOpenHelper {
 	private ArrayList<Recruiter_struct> recruiters;
 	private Context ctx;
 	
-	public static String query = "SELECT _id, rec_name, grade, date, eligibilty, branches_be," +
+	public static String query = "SELECT _id, rec_name, grade, date, branches_be," +
 			" branches_me, branches_intern, pkg_be, pkg_me, pkg_intern, cutoff_be, cutoff_me," +
 			" cutoff_intern FROM recruiters_table";
 	
@@ -78,7 +78,6 @@ public void add_new_to_db(){
 			content.put(rec_name,temp.rec_name);
 			content.put(date,temp.date);
 			content.put(grade,temp.grade);
-			content.put(eligibilty,temp.eligibilty);
 			content.put(branches_be,temp.branches_be);
 			content.put(branches_me,temp.branches_me);
 			content.put(branches_intern,temp.branches_intern);

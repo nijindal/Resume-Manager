@@ -1,5 +1,7 @@
 package com.ResumeManager;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -7,6 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 public class Recruiter_detail extends Activity {
@@ -19,10 +23,9 @@ public class Recruiter_detail extends Activity {
 		ctx = this;
 		Log.d("in recruiter_details","on create");
 		setContentView(R.layout.rec_detail);
-		
+	
 		Retrieve_data get_data = new Retrieve_data();
 		get_data.execute();
-
 
 	}
 	
@@ -53,6 +56,15 @@ public class Recruiter_detail extends Activity {
 		rec_detail_view.recruiter = (TextView) findViewById(R.id.recruiter);
 		rec_detail_view.rec_desc = (TextView) findViewById(R.id.rec_desc);
 		rec_detail_view.date = (TextView) findViewById(R.id.visiting_date);
+		
+		
+		ExpandableListView listView = (ExpandableListView) findViewById(R.id.expand_list);
+		
+		MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, new ArrayList<String>(),
+                new ArrayList<ArrayList<String>>());
+		
+		listView.setAdapter(adapter);
+		
 		rec_detail_view.ctc = (TextView) findViewById(R.id.ctc_data);
 		rec_detail_view.cutoff = (TextView) findViewById(R.id.cutoff_data);
 		rec_detail_view.job_desc = (TextView) findViewById(R.id.job_desc_data);
@@ -103,13 +115,7 @@ public class Recruiter_detail extends Activity {
 			Log.d("in post_execute " + all_details.com_name,all_details.visit_date);
 			System.out.print(all_details);
 			set_data_onview();
-//			output = BackgroundProcess.data_received;
-//			if(response.equals("SUCCESS"))		//autheticated
-//				System.out.println( "in post execute" + response);
-//			Intent Announcement = new Intent();
-//			Announcement.setClassName("com.ResumeManager","com.ResumeManager.AnnouncementsPage");
-////			Announcement.putStringArrayListExtra("announcements", output);
-//			startActivity(Announcement);
+
 			
 		}
 

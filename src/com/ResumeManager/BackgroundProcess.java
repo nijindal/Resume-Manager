@@ -3,9 +3,11 @@ package com.ResumeManager;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -19,6 +21,7 @@ import org.apache.http.message.BasicNameValuePair;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class BackgroundProcess {
 	
@@ -129,14 +132,23 @@ public static ArrayList<Announce> Announcements_data(int number){
 					String line = null;
 					
 					while ((line = reader.readLine()) != null) {
-							Announcements_list.add(line);
+//							Announcements_list.add(line);
+							str_rcvd.append(line);
 					}
-					System.out.println("in announcements" + Announcements_list + "size" +Announcements_list.size());
-					Announcements_struct= structure_announcements(Announcements_list);
-					Iterator<Announce> iter = Announcements_struct.iterator(); 
-					System.out.println("in announcements structs" + iter.next().user );
+					
+					String str = str_rcvd.toString();
+					
+//using Gson to parse the obtained JSON data from the server.....here data obtained is nothing but array of 
+//announce structs...which can be directly put into classes either by array of classes but that is not efficient..
+//so, we are using arrayllist and the second parameter is class name, which needs to be obtained using the
+//TypeToken function.......
+					
+					Gson gson = new Gson();
+					Type listType = new TypeToken<ArrayList<Announce>>(){}.getType();
+					Announcements_struct = (ArrayList<Announce>) gson.fromJson(str,listType);
+
 					return Announcements_struct;
-//					return null;
+
 				}
 				else
 					return null;
@@ -149,29 +161,6 @@ public static ArrayList<Announce> Announcements_data(int number){
 			}
 		return null;
 }
-
-private static ArrayList<Announce> structure_announcements(ArrayList<String> Announcements){
-
-	
-	
-	ArrayList<Announce> structured_Announcements= new ArrayList<Announce>();
-	Iterator<String> iter = Announcements.iterator();
-//	iter.next();						//first one is always empty....skipping that.....
-	
-	while(iter.hasNext())
-	{
-		Announce temp = new Announce();			//we need fresh memory allocation for all the elements of the arraylist<Announce>..
-		temp.id = iter.next();
-		temp.com_name = iter.next();
-		temp.date = iter.next();
-		temp.time = iter.next();
-		temp.body = iter.next();
-		temp.user = iter.next();
-		structured_Announcements.add(temp);
-	}
-	return structured_Announcements;
-}
-
 	
 public static ArrayList<Recruiter_struct> Recruiters_data(){
 		
@@ -193,19 +182,22 @@ public static ArrayList<Recruiter_struct> Recruiters_data(){
 			{
 				if (ResponsePost.getEntity() != null) 
 				{
-					Log.d("connection done", "some data rceived");
+					Log.d("connection done", "some  data rceived");
 					InputStream in = ResponsePost.getEntity().getContent();
 					BufferedReader reader = new BufferedReader(new InputStreamReader(in));		
 					String line = null;
+					StringBuilder str_rcvd = new StringBuilder();
 					
 					while ((line = reader.readLine()) != null) {
-							recruiters_list.add(line);
+						str_rcvd.append(line);
 					}
 
-					System.out.println("in recruiters" + recruiters_list + "size" + recruiters_list.size());
+					String str = str_rcvd.toString();
+					Gson gson = new Gson();
+					Type listType = new TypeToken<ArrayList<Recruiter_struct>>(){}.getType();
+					recruit_struct = (ArrayList<Recruiter_struct>) gson.fromJson(str,listType);
 
-					recruit_struct = structure_recruiters(recruiters_list);
-					 
+					Log.d(recruit_struct.get(0).branches_be,recruit_struct.get(1).pkg_be);
 					return recruit_struct;
 				}
 				else
@@ -220,61 +212,61 @@ public static ArrayList<Recruiter_struct> Recruiters_data(){
 		return null;
 		}
 
-static public ArrayList<Recruiter_struct> structure_recruiters(ArrayList<String> recruiters){
-	
-	ArrayList<Recruiter_struct> recruit_struct = new ArrayList<Recruiter_struct>();
-	recruit_struct.clear();
-	Iterator<String> Iter = recruiters.iterator();
+//static public ArrayList<Recruiter_struct> structure_recruiters(ArrayList<String> recruiters){
+//	
+//	ArrayList<Recruiter_struct> recruit_struct = new ArrayList<Recruiter_struct>();
+//	recruit_struct.clear();
+//	Iterator<String> Iter = recruiters.iterator();
+//
+//	while(Iter.hasNext())
+//	{
+//		Recruiter_struct temp = new Recruiter_struct();
+//		temp.id = Iter.next();
+//		temp.grade = Iter.next();
+//		temp.rec_name = Iter.next();
+//		temp.date = Iter.next();
+////		temp.eligibilty = Iter.next();
+//		assign_details(temp, Iter);
+//		System.out.print("in strucutring" + temp);
+//		recruit_struct.add(temp);
+//	}
+//	return recruit_struct;
+//}
 
-	while(Iter.hasNext())
-	{
-		Recruiter_struct temp = new Recruiter_struct();
-		temp.id = Iter.next();
-		temp.grade = Iter.next();
-		temp.rec_name = Iter.next();
-		temp.date = Iter.next();
-		temp.eligibilty = Iter.next();
-		assign_details(temp, Iter);
-		System.out.print("in strucutring" + temp);
-		recruit_struct.add(temp);
-	}
-	return recruit_struct;
-}
-
-static public void assign_details(Recruiter_struct temp, Iterator<String> Iter ){
-	Log.d("in assign", "details to");
-	String[] paritions = temp.eligibilty.split(" ");
-	int size = paritions.length;
-	
-	int i;
-	for(i=0;i<size;i++)
-	{
-	if(paritions[i].equals("BE"))
-		{
-		Log.d("BE","assign");
-		temp.branches_be = Iter.next();
-		temp.pkg_be = Iter.next();
-		temp.cutoff_be = Iter.next();
-		}
-	else if(paritions[i].equals("ME"))
-		{
-		Log.d("ME","assign");
-		temp.branches_me = Iter.next();
-		temp.pkg_me = Iter.next();
-		temp.cutoff_me = Iter.next();
-		System.out.print("Assignment is correct or not" + temp.branches_me);
-		}
-		
-	else if(paritions[i].equals("INTERN"))
-		{
-		Log.d("INTERN","assign");
-		temp.branches_intern = Iter.next();
-		temp.pkg_intern = Iter.next();
-		temp.cutoff_intern = Iter.next();
-	}
-	}
-
-  }
+//static public void assign_details(Recruiter_struct temp, Iterator<String> Iter ){
+//	Log.d("in assign", "details to");
+////	String[] paritions = temp.eligibilty.split(" ");
+//	int size = paritions.length;
+//	
+//	int i;
+//	for(i=0;i<size;i++)
+//	{
+//	if(paritions[i].equals("BE"))
+//		{
+//		Log.d("BE","assign");
+//		temp.branches_be = Iter.next();
+//		temp.pkg_be = Iter.next();
+//		temp.cutoff_be = Iter.next();
+//		}
+//	else if(paritions[i].equals("ME"))
+//		{
+//		Log.d("ME","assign");
+//		temp.branches_me = Iter.next();
+//		temp.pkg_me = Iter.next();
+//		temp.cutoff_me = Iter.next();
+//		System.out.print("Assignment is correct or not" + temp.branches_me);
+//		}
+//		
+//	else if(paritions[i].equals("INTERN"))
+//		{
+//		Log.d("INTERN","assign");
+//		temp.branches_intern = Iter.next();
+//		temp.pkg_intern = Iter.next();
+//		temp.cutoff_intern = Iter.next();
+//	}
+//	}
+//
+//  }
 
 static public Rec_details get_recruiter_details(int company_id){
 	

@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-	
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-			android:id="@+id/ScrollView01"
-	 		android:layout_width="fill_parent" 
-			android:layout_height="fill_parent">
 			
-<RelativeLayout android:id="@+id/detail"
+<LinearLayout android:id="@+id/detail"
  	android:orientation="vertical" 
  	android:layout_width="fill_parent"
- 	android:layout_height="fill_parent">
+ 	android:layout_height="wrap_content"
+ 	xmlns:android="http://schemas.android.com/apk/res/android">
+ 	
+<RelativeLayout android:id="@+id/top_bar"
+ 	android:orientation="horizontal" 
+ 	android:layout_width="fill_parent"
+ 	android:layout_height="wrap_content"> 	
  	
 <ImageView android:id="@+id/Logo" 
 		 android:layout_width="wrap_content" 
 		 android:layout_height="wrap_content"
+		 android:paddingTop="3px"
+		 android:paddingLeft="3px"
 		 android:src="@drawable/s"
 		 android:padding="8dp">
 </ImageView>	
@@ -22,19 +25,17 @@
     android:layout_height="50px"
 	android:gravity="left"
     android:textStyle="bold"
-    android:paddingTop="10px"
-    android:paddingLeft="10px"
+    android:paddingTop="15px"
+    android:paddingLeft="5px"
     android:layout_toRightOf="@+id/Logo"
-    android:textSize="25sp"/>
+    android:textSize="25sp"
+    android:text="Directi"/>
+</RelativeLayout>
     
- <Button
- 	 android:id="@+id/sub_button"
-     android:layout_height="wrap_content"
-     android:layout_width="wrap_content"
-     android:layout_below="@+id/Logo"
-     android:gravity="center"
-     android:text="Submit Form"/>
-    
+<View android:layout_width="fill_parent"
+	  android:layout_height="0.25px"
+	  android:background="#ffffffff">
+</View> 
     
 <TextView android:id="@+id/Description"
     android:layout_width="fill_parent"
@@ -42,7 +43,6 @@
 	android:gravity="left"
 	android:clickable="true"
 	android:onClick="onClick"
-	android:layout_below="@+id/sub_button"
     android:textSize="17.5px"
     android:text="Description"></TextView>
     
@@ -52,7 +52,6 @@
 	android:gravity="left"
 	android:clickable="true"
 	android:onClick="onClick"
-	android:layout_below="@+id/Description"
     android:textSize="12.5px"
     android:text="Qualcomm offers exciting opportunites for fresh graduates. Opportunities are open in 3 profiles: 1) Software 2) ECE/ Communication ( DSP, Communication systems – Majorly software related work with mix of Communications) 3) Hardware ( Digital Design, VLSI, Verification, Validation) Software: Complex wireless devices are only as powerful as the software that runs them. You’ll develop, implement and maintain multimedia, gaming and application software for the world’s leading-edge mobile devices. Selected students will work in any of the teams mentioned below: 1) Linux/ Android/ kernel / LIMO 2) Multimedia Development (Audio, Video, Graphics) 3) Brew MP 4) 1x Data Team 5) Bluetooth SW Development Team 6) Winmobile SW Development ECE/ Communication: 
     Qualcomm  is the world's largest provider of wireless chipset and software technology, which powers the
@@ -60,13 +59,17 @@
     ates and you’ll be tasked to design the next warp-speed processor, minute circuit or ultra-low-power radio that makes Qualcomm a global leader in wireless technology. Selected students will be working in any of the teams mentioned below: 1) Digital Design 2)">
 </TextView>
 
+<View android:layout_width="fill_parent"
+	  android:layout_height="0.25px"
+	  android:background="#ffffffff">
+</View> 
+
 <TextView android:id="@+id/visiting_on"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
 	android:gravity="left"
 	android:clickable="true"
 	android:onClick="onClick"
-	android:layout_below="@+id/rec_desc"
     android:textSize="17.5px"
     android:text="Visitng On"></TextView>
 
@@ -76,14 +79,45 @@
 	android:gravity="left"
 	android:clickable="true"
 	android:onClick="onClick"
-	android:layout_below="@+id/visiting_on"
     android:textSize="12.5px"></TextView>
+
+<View android:layout_width="fill_parent"
+	  android:layout_height="0.25px"
+	  android:background="#ffffffff">
+</View> 
+
+<LinearLayout android:id="@+id/linear_eligible"
+ 	android:orientation="vertical" 
+ 	android:layout_width="fill_parent"
+ 	android:layout_height="wrap_content">
+
+<TextView android:id="@+id/eligibility"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+	android:gravity="left"
+	android:clickable="true"
+	android:onClick="onClick"
+    android:textSize="17.5px"
+    android:text="Eligibility"></TextView>
+    
+<ExpandableListView android:id="@+id/expand_list" 
+	android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="none">
+ </ExpandableListView>    
+    
+</LinearLayout>
+    
+<View android:layout_width="fill_parent"
+	  android:layout_height="0.25px"
+	  android:background="#ffffffff">
+</View>     
     
  <TextView android:id="@+id/cutoff"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
 	android:gravity="left"
-	android:layout_below="@+id/visiting_date"
     android:textSize="17.5px"
     android:text="CutOff"></TextView>
     
@@ -93,14 +127,17 @@
 	android:gravity="left"
 	android:clickable="true"
 	android:onClick="onClick"
-	android:layout_below="@+id/cutoff"
     android:textSize="12.5px"></TextView>
+
+<View android:layout_width="fill_parent"
+	  android:layout_height="0.25px"
+	  android:background="#ffffffff">
+</View>        
 
  <TextView android:id="@+id/ctc"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
 	android:gravity="left"
-	android:layout_below="@+id/cutoff_data"
     android:textSize="17.5px"
     android:text="CTC"></TextView>
     
@@ -110,27 +147,41 @@
 	android:gravity="left"
 	android:clickable="true"
 	android:onClick="onClick"
-	android:layout_below="@+id/ctc"
     android:textSize="12.5px"/>
-        
- <TextView android:id="@+id/job_desc"
+
+<View android:layout_width="fill_parent"
+	  android:layout_height="0.25px"
+	  android:background="#ffffffff">
+</View>    
+    
+<TextView android:id="@+id/job_desc"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
 	android:gravity="left"
-	android:layout_below="@+id/ctc_data"
     android:textSize="17.5px"
     android:text="Job Description"></TextView>
     
- <TextView android:id="@+id/job_desc_data"
+<TextView android:id="@+id/job_desc_data"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
 	android:gravity="left"
 	android:clickable="true"
 	android:onClick="onClick"
-	android:layout_below="@+id/job_desc"
     android:textSize="12.5px"/>
 
+<View android:layout_width="fill_parent"
+	  android:layout_height="0.25px"
+	  android:background="#ffffffff">
+</View>            
 
-</RelativeLayout>
+<Button
+ 	 android:id="@+id/sub_button"
+     android:layout_height="wrap_content"
+     android:layout_width="wrap_content"
+     android:layout_below="@+id/Logo"
+     android:layout_marginTop="20px"
+	 android:layout_gravity="center_vertical|center_horizontal|center" 
+     android:text="Submit Form"/>
 
-</ScrollView>
+</LinearLayout>
+
