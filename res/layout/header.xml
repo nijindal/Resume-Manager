@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:id="@+id/header"
+ 	android:orientation="vertical" 
+ 	android:layout_width="fill_parent"
+ 	android:layout_height="wrap_content">
+ 	
+<RelativeLayout android:id="@+id/top_bar"
+ 	android:orientation="horizontal" 
+ 	android:layout_width="fill_parent"
+ 	android:layout_height="wrap_content"> 	
+ 	
+<ImageView android:id="@+id/Logo" 
+		 android:layout_width="wrap_content" 
+		 android:layout_height="wrap_content"
+		 android:paddingTop="3px"
+		 android:paddingLeft="3px"
+		 android:src="@drawable/s"
+		 android:padding="8dp">
+</ImageView>	
+ 	
+<TextView android:id="@+id/recruiter"
+    android:layout_width="fill_parent"
+    android:layout_height="50px"
+	android:gravity="left"
+    android:textStyle="bold"
+    android:paddingTop="15px"
+    android:paddingLeft="5px"
+    android:layout_toRightOf="@+id/Logo"
+    android:textSize="25sp"
+    android:text="Directi"/>
+
+</RelativeLayout>
+
+<View android:layout_width="fill_parent"
+	  android:layout_height="0.25px"
+	  android:background="#ffffffff">
+</View> 
+    
+<TextView android:id="@+id/Description"
+    android:layout_width="fill_parent"
+    android:layout_height="20px"
+	android:gravity="left"
+	android:layout_marginBottom="3px"
+	android:layout_marginTop="3px"
+	android:textSize="17.5px"
+    android:text="Description"></TextView>
+    
+<TextView android:id="@+id/rec_desc"
+    android:layout_width="fill_parent"
+    android:layout_height="20px"
+	android:gravity="left"
+	android:clickable="true"
+	android:onClick="onClick"
+    android:textSize="12.5px"/>	
+
+<View android:layout_width="fill_parent"
+	  android:layout_height="0.25px"
+	  android:background="#ffffffff">
+</View> 
+
+<TextView android:id="@+id/visiting_on"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+	android:gravity="left"
+	android:layout_marginBottom="3px"
+	android:layout_marginTop="3px"
+	android:textSize="17.5px"
+    android:text="Visitng On"></TextView>
+
+<TextView android:id="@+id/visiting_date"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+	android:gravity="left"
+	android:clickable="true"
+	android:onClick="onClick"
+    android:textSize="12.5px"></TextView>
+
+<View android:layout_width="fill_parent"
+	  android:layout_height="0.25px"
+	  android:background="#ffffffff">
+</View> 
+
+<TextView android:id="@+id/eligibility"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+	android:gravity="left"
+	android:layout_marginBottom="3px"
+	android:layout_marginTop="3px"
+    android:textSize="17.5px"
+    android:text="Eligibility"></TextView>
+</LinearLayout>
+     	

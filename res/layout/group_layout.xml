@@ -4,9 +4,10 @@
         xmlns:android="http://schemas.android.com/apk/res/android">
 
 <TextView android:id="@+id/tvGroup" android:layout_width="fill_parent"
-        android:layout_height="30dip" 
+        android:layout_height="40dip" 
         android:text="Groups" 
         android:paddingLeft="35px" 
         android:paddingRight="35px"
+		android:gravity="center_vertical"
         android:textSize="17.5px"></TextView>
 </LinearLayout>

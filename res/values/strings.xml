@@ -3,7 +3,7 @@
     <string name="hello">Hello World, ResumeManagerActivity!</string>
     <string name="app_name">ResumeManager</string>
     <string name="announcements_title">Announcements</string>
-    <string name="no_notes">No Announcements are available Yet</string>
+    <string name="no_notes">Loading Announcements....</string>
     <string name="server_error">There is problem in connection from server"</string>
     <string name="Announcements">Announcements</string>
     <string name="Recruiters">Recruiters</string>
@@ -11,4 +11,6 @@
     <string name="recruiters_title">Recruiters</string>
     <string name="announcement_menu_R">Recruiters</string>
     <string name="refresh_menu_R">Recruiters</string>
+    <string name="loading_recruiters">Retrieving Recruiters....</string>
+    <string name="URL">http://resumemanager.x10.mx/</string>
 </resources>

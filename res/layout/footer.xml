@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    
+<LinearLayout	xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:id="@+id/footer"
+ 	android:orientation="vertical" 
+ 	android:layout_width="fill_parent"
+ 	android:layout_height="wrap_content">
+
+<View android:layout_width="fill_parent"
+	  android:layout_height="0.25px"
+	  android:background="#ffffffff">
+</View>        
+
+<TextView android:id="@+id/cutoff"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="3px"
+    android:gravity="left"
+    android:textSize="17.5px"
+    android:text="CutOff"></TextView>
+    
+ <TextView android:id="@+id/cutoff_data"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+	android:gravity="left"
+    android:layout_marginBottom="3px"
+    android:textSize="12.5px"></TextView>
+
+<View android:layout_width="fill_parent"
+	  android:layout_height="0.25px"
+	  android:background="#ffffffff">
+</View>        
+
+ <TextView android:id="@+id/ctc"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+	android:gravity="left"
+	android:layout_marginTop="3px"
+	android:layout_marginBottom="3px"
+    android:textSize="17.5px"
+    android:text="CTC"></TextView>
+    
+ <TextView android:id="@+id/ctc_data"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+	android:gravity="left"
+	android:layout_marginBottom="3px"
+    android:textSize="12.5px"/>
+
+<View android:layout_width="fill_parent"
+	  android:layout_height="0.25px"
+	  android:background="#ffffffff">
+</View>    
+    
+<TextView android:id="@+id/job_desc"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+	android:gravity="left"
+	android:layout_marginTop="3px"
+	android:layout_marginBottom="3px"
+    android:textSize="17.5px"
+    android:text="Job Description"></TextView>
+    
+<TextView android:id="@+id/job_desc_data"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+	android:gravity="left"
+	android:layout_marginBottom="3px"
+    android:textSize="12.5px"/>
+
+<View android:layout_width="fill_parent"
+	  android:layout_height="0.25px"
+	  android:background="#ffffffff">
+</View>            
+
+<RelativeLayout android:id="@+id/button_rel"
+ 	android:orientation="horizontal" 
+ 	android:layout_width="fill_parent"
+ 	android:layout_height="wrap_content"/> 	
+ 	
+<!--<Button-->
+<!-- 	 android:id="@+id/sub_button"-->
+<!--     android:layout_width="wrap_content"-->
+<!--	 android:layout_height="wrap_content"/>-->
+<!--	     -->
+<!--android:layout_marginTop="10px"-->
+<!--	 android:layout_gravity="center_vertical|center_horizontal|center" -->
+<!--     android:text="Submit Form"/>-->
+
+</LinearLayout>
+

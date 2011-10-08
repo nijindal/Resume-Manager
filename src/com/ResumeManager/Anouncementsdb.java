@@ -14,6 +14,7 @@ public class Anouncementsdb extends SQLiteOpenHelper{
 
 	final static String com_name="company";
 	final static String db_name="database";
+	final static String identity="identity";
 	final static String announcement_table="announcement_table";
 	final static String date="date";
 	final static String time="time";
@@ -25,9 +26,9 @@ public class Anouncementsdb extends SQLiteOpenHelper{
 	private Context ctx;
 	public static SQLiteDatabase db;
 	
-	public static String query = "SELECT _id, company, date, time, body, user FROM announcement_table";
+	public static String query = "SELECT _id, company, date, time, body, user FROM announcement_table order by identity DESC";
 	
-	public String CREATE_TABLE_ANNOUNCE = "CREATE TABLE "+ announcement_table + " ( _id INTEGER PRIMARY KEY AUTOINCREMENT, " + com_name + " TEXT NOT NULL," +
+	public String CREATE_TABLE_ANNOUNCE = "CREATE TABLE "+ announcement_table + " ( _id INTEGER PRIMARY KEY AUTOINCREMENT, " + identity + " INTEGER, " +com_name + " TEXT NOT NULL," +
 	date + " TEXT NOT NULL," + time + " TEXT NOT NULL," + body + " TEXT NOT NULL," + user +" TEXT NOT NULL);";
 	
 	public static String CREATE_TABLE_RECRUIT = "CREATE TABLE "+ Recruitersdb.recruiters_table + " ( _id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -57,6 +58,7 @@ public Anouncementsdb(Context context, ArrayList<Announce> new_announcements){
 		Log.d("Anouncementsdb","in oncreate");
 		db.execSQL(CREATE_TABLE_ANNOUNCE);
 		db.execSQL(CREATE_TABLE_RECRUIT);
+
 		
 //we need to declare all the tables to be used in a database together...because later in onCreate is never
 //		called for same database...... 
@@ -79,7 +81,7 @@ public Anouncementsdb(Context context, ArrayList<Announce> new_announcements){
 		while(Iter.hasNext()){
 			temp = Iter.next();
 			ContentValues content = new ContentValues();
-//			content.put(unique_id, (Integer.parseInt(temp.id)));
+			content.put(identity, (Integer.parseInt(temp.id)));
 			Log.d("add new to db","the iteraation loop");
 			content.put(com_name,temp.com_name);
 			content.put(date,temp.date);
@@ -94,10 +96,13 @@ public Anouncementsdb(Context context, ArrayList<Announce> new_announcements){
 	}
 	
 	public Cursor fetch_all(){
+		db = this.getWritableDatabase();
 		Log.d("fetch all","announcementdb");
 //		return db.query(announcement_table, new String[]{unique_id,com_name,date,time,body,user}, null,null,null,null,unique_id+"DESC");
 //		Cursor cursor =  db.query(announcement_table, new String[]{unique_id,com_name,date,time,body,user}, null,null,null,null,null);
-		Cursor cursor = db.rawQuery(query, null);
+		Cursor cursor=null;
+		if(db!=null)
+		cursor = db.rawQuery(query, null);
 		
 //we must have an column called _id in the table if you want to use cursor adapter on the given database and that
 //_id should be unique i.e., primary key ...and auto increment 		
@@ -108,6 +113,8 @@ public Anouncementsdb(Context context, ArrayList<Announce> new_announcements){
         	cursor.moveToFirst();
         	return cursor;
         }
+        else
+        	Log.d("fetch all","NULLL");
 		return null;
 	}
 }

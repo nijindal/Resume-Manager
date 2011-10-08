@@ -25,7 +25,7 @@ public class MyCustomRecruitCursor extends SimpleCursorAdapter {
 	int[] to;
 	RelativeLayout boundry;
 	Context ctx;
-	final public String[] BE_branches= {
+	final static public String[] BE_branches= {
 										"Biotechnology",		
 								 		"Civil",		
 								 		"Computer",		
@@ -39,7 +39,7 @@ public class MyCustomRecruitCursor extends SimpleCursorAdapter {
 										"Polymer Science and Chemical Technology"
 	 									};
 	
-	final public String[] ME_branches = {
+	final static public String[] ME_branches = {
 										"BioInformatics",
 										"Computer Technology & Applications",
 										"Control & Instrumentation",
@@ -91,14 +91,9 @@ public class MyCustomRecruitCursor extends SimpleCursorAdapter {
 
 				Log.d("custom adapter","on click"+ v.getId());
 			
-				AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
-//				builder.setTitle("Hey....it worked");
-
 				Intent to_details = new Intent();
 				to_details.setClassName("com.ResumeManager", "com.ResumeManager.Recruiter_detail");
 				ctx.startActivity(to_details);
-				AlertDialog alert = builder.create();
-				alert.show();
 			}	
 
 		});

@@ -3,6 +3,7 @@ package com.ResumeManager;
 import java.util.ArrayList;
 
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
@@ -16,6 +17,7 @@ import android.widget.SimpleCursorAdapter;
 
 public class Recruiters extends ListActivity {
 
+	ProgressDialog pleaseWait;
 	public ArrayList<String> recruiters = new ArrayList<String>();
 	private ArrayList<Recruiter_struct> recruiters_list = new ArrayList<Recruiter_struct>();
 	
@@ -24,6 +26,7 @@ public class Recruiters extends ListActivity {
 	{
 		Log.d("in on create","Recruiters");
 		super.onCreate(savedInstanceState);
+		pleaseWait = ProgressDialog.show(this, "", "Retrieving Recuiters, please wait..", true);
 		setContentView(R.layout.recruiters_page);
 		refresh_list();
 	
@@ -79,11 +82,11 @@ public class Recruiters extends ListActivity {
 		int[] to = new int[] {R.id.rec_name, R.id.date_rec, R.id.branches_be, R.id.branches_me, R.id.branches_intern};
 //		int[] to = new int[] {R.id.rec_name, R.id.date_rec};
 
-		
+		pleaseWait.dismiss();
 		MyCustomRecruitCursor adapter = new MyCustomRecruitCursor(this, R.layout.row_recruiter,data_db,from,to);
 		setListAdapter(adapter);
 		Log.d("back to save to db","recriters");
-	}
+	}	
 	
 	private class Retrieve_recruiters extends AsyncTask<Void,Void,Void>{
 

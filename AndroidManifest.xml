@@ -5,16 +5,15 @@
       android:versionName="1.0">
     <uses-sdk android:minSdkVersion="8" />
     
-<uses-permission android:name="android.permission.INTERNET" />   
-
     <application android:icon="@drawable/icon" android:label="@string/app_name">
         <activity android:name=".ResumeManagerActivity"
                   android:label="@string/app_name">
                   
-            <intent-filter>
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        </intent-filter>
+            
         </activity>
         
         <activity android:name=".Recruiters"
@@ -27,8 +26,8 @@
         <activity android:name=".Recruiter_detail"
                   android:label="">
         </activity>        
-
-
-                
-    </application>
+	</application>
+	
+	<uses-sdk android:minSdkVersion="8" />
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
