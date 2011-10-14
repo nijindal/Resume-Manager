@@ -2,11 +2,10 @@ package com.ResumeManager;
 
 public class Recruiter_struct {
 
-	public String id;
+	public int id;
 	public String grade;
 	public String rec_name;
 	public String date;
-//	public String eligibilty;
 
 	public String branches_be;
 	public String pkg_be;

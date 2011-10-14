@@ -33,6 +33,7 @@ public class Anouncementsdb extends SQLiteOpenHelper{
 	
 	public static String CREATE_TABLE_RECRUIT = "CREATE TABLE "+ Recruitersdb.recruiters_table + " ( _id INTEGER PRIMARY KEY AUTOINCREMENT, "
 	
+	+ Recruitersdb.identity + " INTEGER, " 
 	+ Recruitersdb.grade + " TEXT NOT NULL, "
 	+ Recruitersdb.rec_name + " TEXT NOT NULL," 
 	+ Recruitersdb.date + " TEXT NOT NULL," 

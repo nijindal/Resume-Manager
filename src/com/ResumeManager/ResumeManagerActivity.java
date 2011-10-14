@@ -9,18 +9,21 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+
 public class ResumeManagerActivity extends Activity {
 	/** Called when the activity is first created. */
 
 	private ProgressDialog pleasewait;
-	private String username;
-	private String password;
+	private String username = null;
+	private String password = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Log.d("in oncreate", "process started");
 		setContentView(R.layout.indexpage);
+	
+		Log.d("in oncreate", "process started");
+		
 		Log.d("after contenview", "process started");
 	}
 
@@ -43,14 +46,11 @@ public class ResumeManagerActivity extends Activity {
 		protected Void doInBackground(Void... params) {
 			System.out.println("in the Async  doInBckground");
 			response = BackgroundProcess.makeConnection(username, password);
-			//Response = BackgroundProcess.result;
-			// TODO Auto-generated method stub////
 			return null;
 		}
 
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
-//			output = BackgroundProcess.data_received;
 			if(response.equals("SUCCESS"))		//autheticated
 				System.out.println( "in post execute" + response);
 			Intent Announcement = new Intent();

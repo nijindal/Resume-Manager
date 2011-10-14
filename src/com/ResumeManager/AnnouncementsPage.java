@@ -12,10 +12,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SimpleCursorAdapter;
 
-
-//Announcement Page it is........
 public class AnnouncementsPage extends ListActivity {
 	
 	ProgressDialog pleaseWait;
@@ -24,21 +25,27 @@ public class AnnouncementsPage extends ListActivity {
 	public ArrayList<info> structured_Announcements = new ArrayList<info>();
 	ArrayList<Announce> announce_list = null;
 	public static int number_of_announcements=0;
+	ProgressBar progress_bar = null;
+	ImageView refresh_button = null;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		announce_list = null;
-		pleaseWait = ProgressDialog.show(this, "", "Retrieving Announcements, please wait..", true);
-		setContentView(R.layout.mainpage);
+		setContentView(R.layout.announcement);
+		progress_bar = (ProgressBar)findViewById(R.id.progressbar_ann);
+		refresh_button = (ImageView) findViewById(R.id.refresh_announce);
 		Log.d("in on of create","Announcements");
 		announce_db = new Anouncementsdb(this, null);
 		fetchandshow();
-		refresh_list();
+		refresh_list(refresh_button);
 
 	}
 	
-	public void refresh_list(){
+	public void refresh_list(View v){
+	
+		progress_bar.setVisibility(View.VISIBLE);
 		(new Retrieve_Announcements()).execute();
 		Log.d("announcementpage","refresh list");
 	}
@@ -60,7 +67,7 @@ public class AnnouncementsPage extends ListActivity {
 		switch(Item.getItemId())
 		{
 		case R.id.Refresh_menu_ann:
-			refresh_list();
+//			refresh_list();
 			Log.d("menu button pressed","recruiters");
 			
 			return true;
@@ -93,10 +100,11 @@ public class AnnouncementsPage extends ListActivity {
         startManagingCursor(data_db);
         number_of_announcements = data_db.getCount();
 		Log.d(new Integer(data_db.getCount()).toString(), new Integer(data_db.getColumnCount()).toString());
-		pleaseWait.dismiss();
 		String[] from = new String[] {Anouncementsdb.com_name,Anouncementsdb.date,Anouncementsdb.time,Anouncementsdb.body,Anouncementsdb.user};
         int[] to = new int[] { R.id.com_name, R.id.date, R.id.time, R.id.body, R.id.user};
-//the above two arrays are used for mapping.   .........        
+//the above two arrays are used for mapping.   .........
+        Log.d("fetch and show","checking for visibility thing");
+        progress_bar.setVisibility(View.INVISIBLE);
         SimpleCursorAdapter adapter = new MyCustomAnnounceCursorAdap(this, R.layout.row_announce,data_db,from,to);
         
         setListAdapter(adapter);
@@ -133,7 +141,10 @@ public class AnnouncementsPage extends ListActivity {
 				savetodb();
 			}
 			else
+			{
 				Log.d("Announcemnts pAge.","it came out to be null");
+				progress_bar.setVisibility(1);
+			}
 		}
 	}
 }

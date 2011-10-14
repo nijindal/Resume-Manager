@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
@@ -27,20 +29,45 @@ public class Recruiter_detail extends ExpandableListActivity {
 	ExpandableListView listView;
 	ArrayList groups;
 	ArrayList children;
+	View footer;
+	View header;
+	views rec_detail_view;
+	ProgressBar progress = null;
+	ImageView logo=null;
 	
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-//		listView = getExpandableListView();
 		ctx = this;
-		pleasewait = ProgressDialog.show(this, "","Retrieving Recruiter Details...Please wait");
 		Log.d("in recruiter_details","on create");
 		setContentView(R.layout.rec_detail);
-	
+		Bundle data = getIntent().getExtras();
+		MyParcelable old_data = data.getParcelable("old_data");
+		Log.d(old_data.com_id,old_data.cutoff);
+		fetchandshow(old_data);
 		
+	}
+	
+	public void fetchandshow(MyParcelable oldData){
+		
+		all_details = new Rec_details();
+		all_details.com_id = oldData.com_id;
+		all_details.grade = oldData.grade;
+		all_details.com_name = oldData.com_name;
+		all_details.branches_be = oldData.branches_be;
+		all_details.branches_me = oldData.branches_me;
+		all_details.branches_intern = oldData.branches_intern;
+		all_details.rec_desc = "";
+		all_details.visit_date = oldData.visit_date;
+		all_details.cutoff = oldData.cutoff;
+		all_details.job_desc = "";
+		all_details.ctc = oldData.ctc;
+		all_details.can_apply = "no";
+		set_data_onview();
 		Retrieve_data get_data = new Retrieve_data();
 		get_data.execute();
-
+		progress.setVisibility(View.INVISIBLE);
+		
 	}
 	
 	public void change_layout(int id){
@@ -64,6 +91,10 @@ public class Recruiter_detail extends ExpandableListActivity {
 	}
 	
 	void put_branches(){
+
+		groups.clear();
+		children.clear();
+		
 		if(all_details.branches_be.length()!=0)
 		{
 				HashMap m = new HashMap();
@@ -107,26 +138,9 @@ public class Recruiter_detail extends ExpandableListActivity {
 		}
 	}
 	
-	void set_data_onview(){
-		
-		groups = new ArrayList();
-		children = new ArrayList();
-		
-		put_branches();
-		
-		views rec_detail_view = new views();
+	void refresh_data(){
 
-		LayoutInflater factory = getLayoutInflater();
-		View header = factory.inflate(R.layout.header, null);
-		View footer = factory.inflate(R.layout.footer, null);
-		
-		rec_detail_view.recruiter = (TextView) header.findViewById(R.id.recruiter);
-		rec_detail_view.rec_desc = (TextView) header.findViewById(R.id.rec_desc);
-		rec_detail_view.date = (TextView) header.findViewById(R.id.visiting_date);
-		rec_detail_view.ctc = (TextView) footer.findViewById(R.id.ctc_data);
-		rec_detail_view.cutoff = (TextView) footer.findViewById(R.id.cutoff_data);
-		rec_detail_view.job_desc = (TextView) footer.findViewById(R.id.job_desc_data);		
-//		rec_detail_view.sub_button = (Button) footer.findViewById(R.id.sub_button);
+		put_branches();
 		
 		RelativeLayout layout =  (RelativeLayout)footer.findViewById(R.id.button_rel);
 		if(all_details.can_apply.equals("yes"))
@@ -134,7 +148,6 @@ public class Recruiter_detail extends ExpandableListActivity {
 			Button sub_button = new Button(footer.getContext());
 			LayoutParams params = new RelativeLayout.LayoutParams(-2,-2);
 			params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-//			params.leftMargin=100;
 			params.topMargin=5;
 			sub_button.setLayoutParams(params);
 			sub_button.setText("Submit");
@@ -145,6 +158,57 @@ public class Recruiter_detail extends ExpandableListActivity {
 		{
 			Log.d("Notification....","you are not eligible  for the cmpany");
 		}
+	
+
+		rec_detail_view.rec_desc.setOnClickListener(new View.OnClickListener(){
+		@Override
+		public void onClick(View v) {
+				
+				Log.d("recruiter_detail","on click"+ v.getId());
+				change_layout(v.getId());
+		}
+			
+		});	
+		
+		rec_detail_view.recruiter.setText(all_details.com_name);
+		rec_detail_view.rec_desc.setText(all_details.rec_desc);
+		rec_detail_view.date.setText(all_details.visit_date);
+		rec_detail_view.ctc.setText(all_details.ctc);
+		rec_detail_view.cutoff.setText(all_details.cutoff);
+		rec_detail_view.job_desc.setText(all_details.job_desc);		
+		
+	}
+	void set_data_onview(){
+		
+		groups = new ArrayList();
+		children = new ArrayList();
+		
+		put_branches();
+		
+		rec_detail_view = new views();
+
+		LayoutInflater factory = getLayoutInflater();
+		header = factory.inflate(R.layout.header, null);
+		footer = factory.inflate(R.layout.footer, null);
+		
+		logo = (ImageView) header.findViewById(R.id.Logo);
+		
+		rec_detail_view.recruiter = (TextView) header.findViewById(R.id.recruiter);
+		rec_detail_view.rec_desc = (TextView) header.findViewById(R.id.rec_desc);
+		rec_detail_view.date = (TextView) header.findViewById(R.id.visiting_date);
+		rec_detail_view.ctc = (TextView) footer.findViewById(R.id.ctc_data);
+		rec_detail_view.cutoff = (TextView) footer.findViewById(R.id.cutoff_data);
+		rec_detail_view.job_desc = (TextView) footer.findViewById(R.id.job_desc_data);		
+		
+		progress = (ProgressBar) header.findViewById(R.id.progressbar_rec_det);
+	
+
+		if(all_details.grade.equals("S"))
+			logo.setImageResource(R.drawable.s);
+		else if(all_details.grade.equals("A+"))
+			logo.setImageResource(R.drawable.aplus);
+		else if(all_details.grade.equals("A"))
+			logo.setImageResource(R.drawable.a);
 		
 		SimpleExpandableListAdapter expListAdapter = 
 			new SimpleExpandableListAdapter( 
@@ -162,35 +226,13 @@ public class Recruiter_detail extends ExpandableListActivity {
 			
 		this.getExpandableListView().addHeaderView(header);
 		this.getExpandableListView().addFooterView(footer);
-
-//		ExpandableListView listView = (ExpandableListView) findViewById(R.id.expand_list);
-//		MyExpandableListAdapter adapter = new MyExpandableListAdapter(this, new ArrayList<String>(),
-//                new ArrayList<ArrayList<String>>());
-//
-//		listView.addHeaderView(header);
-//		listView.addFooterView(footer);
-		setListAdapter(expListAdapter);
-
-		pleasewait.dismiss();
-	
-///For adding click listener there............		
-		rec_detail_view.rec_desc.setOnClickListener(new View.OnClickListener(){
-			
-			@Override
-			public void onClick(View v) {
-				
-				Log.d("recruiter_detail","on click"+ v.getId());
-				change_layout(v.getId());
-			}
-			
-		});	
+		this.getExpandableListView().setAdapter(expListAdapter);
 
 		rec_detail_view.recruiter.setText(all_details.com_name);
-		rec_detail_view.rec_desc.setText(all_details.rec_desc);
 		rec_detail_view.date.setText(all_details.visit_date);
 		rec_detail_view.ctc.setText(all_details.ctc);
 		rec_detail_view.cutoff.setText(all_details.cutoff);
-		rec_detail_view.job_desc.setText(all_details.job_desc);		
+		
 	}
 	
 	private class views{
@@ -207,7 +249,6 @@ public class Recruiter_detail extends ExpandableListActivity {
 	
 	private class Retrieve_data extends AsyncTask<Void, Void, Void> {
 
-		String response;
 		@Override
 		protected Void doInBackground(Void... params) {
 			
@@ -219,7 +260,7 @@ public class Recruiter_detail extends ExpandableListActivity {
 			super.onPostExecute(result);
 			Log.d("in post_execute " + all_details.com_name,all_details.visit_date);
 			System.out.print(all_details);
-			set_data_onview();
+			refresh_data();
 
 			
 		}

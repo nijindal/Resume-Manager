@@ -15,7 +15,7 @@ public class Recruitersdb extends SQLiteOpenHelper {
 	public SQLiteDatabase db;
 	final static String db_name="database";
 	final static String recruiters_table="recruiters_table";
-	
+	final static String identity="identity";
 	final static String rec_name="rec_name";
 	
 	final static String unique_id="_id";
@@ -36,9 +36,9 @@ public class Recruitersdb extends SQLiteOpenHelper {
 	private ArrayList<Recruiter_struct> recruiters;
 	private Context ctx;
 	
-	public static String query = "SELECT _id, rec_name, grade, date, branches_be," +
+	public static String query = "SELECT _id, identity, rec_name, grade, date, branches_be," +
 			" branches_me, branches_intern, pkg_be, pkg_me, pkg_intern, cutoff_be, cutoff_me," +
-			" cutoff_intern FROM recruiters_table";
+			" cutoff_intern FROM recruiters_table ORDER BY identity DESC";
 	
 	
 	
@@ -46,6 +46,7 @@ public class Recruitersdb extends SQLiteOpenHelper {
 		super(context, db_name, null, DATABASE_VERSION);
 //		db = Anouncementsdb.db;
 		recruiters = new_Recruiters; 
+		db = this.getWritableDatabase();	
 	}
 	
 	@Override
@@ -74,7 +75,7 @@ public void add_new_to_db(){
 			if((temp.branches_intern)==null)
 				Log.d("the value of temp.branches_me is" + temp.branches_me,"NULL Value has been received");
 			
-
+			content.put(identity, temp.id);
 			content.put(rec_name,temp.rec_name);
 			content.put(date,temp.date);
 			content.put(grade,temp.grade);

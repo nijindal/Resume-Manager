@@ -2,75 +2,78 @@
     
 <LinearLayout	xmlns:android="http://schemas.android.com/apk/res/android" 
 	android:id="@+id/footer"
+	android:paddingBottom="3dip"
  	android:orientation="vertical" 
  	android:layout_width="fill_parent"
  	android:layout_height="wrap_content">
 
 <View android:layout_width="fill_parent"
-	  android:layout_height="0.25px"
-	  android:background="#ffffffff">
+	  android:layout_marginTop="3dip"		
+	  android:layout_height="0.25dip"
+	  android:background="#ff444444">
 </View>        
 
 <TextView android:id="@+id/cutoff"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="3px"
+    android:layout_marginTop="3dip"
     android:gravity="left"
-    android:textSize="17.5px"
+    android:textSize="17.5dip"
     android:text="CutOff"></TextView>
     
  <TextView android:id="@+id/cutoff_data"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
 	android:gravity="left"
-    android:layout_marginBottom="3px"
-    android:textSize="12.5px"></TextView>
+    android:layout_marginBottom="3dip"
+    android:textSize="15dip"></TextView>
 
 <View android:layout_width="fill_parent"
-	  android:layout_height="0.25px"
-	  android:background="#ffffffff">
+	  android:layout_height="0.25dip"
+	  android:background="#ff444444">
 </View>        
 
  <TextView android:id="@+id/ctc"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
 	android:gravity="left"
-	android:layout_marginTop="3px"
-	android:layout_marginBottom="3px"
-    android:textSize="17.5px"
+	android:layout_marginTop="3dip"
+	android:layout_marginBottom="3dip"
+    android:textSize="17.5dip"
     android:text="CTC"></TextView>
     
  <TextView android:id="@+id/ctc_data"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
 	android:gravity="left"
-	android:layout_marginBottom="3px"
-    android:textSize="12.5px"/>
+	android:layout_marginBottom="3dip"
+    android:textSize="15dip"/>
 
 <View android:layout_width="fill_parent"
-	  android:layout_height="0.25px"
-	  android:background="#ffffffff">
+	  android:layout_height="0.25dip"
+	  android:background="#ff444444">
 </View>    
     
 <TextView android:id="@+id/job_desc"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
 	android:gravity="left"
-	android:layout_marginTop="3px"
-	android:layout_marginBottom="3px"
-    android:textSize="17.5px"
+	android:layout_marginTop="3dip"
+	android:layout_marginBottom="3dip"
+    android:textSize="17.5dip"
     android:text="Job Description"></TextView>
     
 <TextView android:id="@+id/job_desc_data"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
 	android:gravity="left"
-	android:layout_marginBottom="3px"
-    android:textSize="12.5px"/>
+	android:layout_marginBottom="3dip"
+	android:text="Downloading Job Description data.."
+    android:textSize="15dip"/>
 
 <View android:layout_width="fill_parent"
-	  android:layout_height="0.25px"
-	  android:background="#ffffffff">
+	  android:layout_height="0.25dip"
+	  android:background="#ff444444">
 </View>            
 
 <RelativeLayout android:id="@+id/button_rel"

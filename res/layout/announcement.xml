@@ -5,7 +5,6 @@
     android:layout_height="fill_parent"
     >
 
-    
 <RelativeLayout android:layout_width="fill_parent"
 				android:background="@drawable/background"
    				android:layout_height="40dip">    
@@ -17,28 +16,28 @@
     android:textSize="17.5dip"
     android:textStyle="bold"
     android:layout_centerVertical="true"
-    android:text="Recruiters"></TextView>
+    android:text="Announcements"></TextView>
 
 
-<ImageView android:id="@+id/refresh_rec" 
+<ImageView android:id="@+id/refresh_announce" 
 			android:layout_width="wrap_content" 
 		    android:layout_height="wrap_content"
 		    android:src="@drawable/refresh"
-        	android:clickable="true"
-        	android:onClick="refresh_list"
+		    android:clickable="true"
+		    android:onClick="refresh_list"
 		    android:layout_alignParentRight="true">
 </ImageView>	
 
 <View 
-	  android:id="@+id/seperator_rec"
+	  android:id="@+id/seperator_ann"
 	  android:layout_width=".25dip"
 	  android:layout_height="fill_parent"
-	  android:layout_toLeftOf="@+id/refresh_rec"
+	  android:layout_toLeftOf="@+id/refresh_announce"
 	  android:background="#ff444444">
 </View>        
 
 
-<ProgressBar    android:id="@+id/progressbar_rec"
+<ProgressBar    android:id="@+id/progressbar_ann"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content"
         android:maxHeight="30dip"
@@ -47,14 +46,14 @@
         android:minWidth="30dip"
         android:visibility="invisible"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/seperator_rec"
+        android:layout_toLeftOf="@+id/seperator_ann"
         android:paddingRight="3dip"/>        
 
-</RelativeLayout>   
-
+</RelativeLayout>    
 
 <ListView 	android:id="@android:id/list"
 			android:layout_width="fill_parent" 
+			android:background="#0A0A0A"
 			android:layout_height="fill_parent">
 </ListView>
 

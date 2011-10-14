@@ -26,6 +26,7 @@ import com.google.gson.reflect.TypeToken;
 
 public class BackgroundProcess {
 	
+	
 	static String result[];
 	static int Number_of_stmt = 0;
 //	static String domain = "http://resumemanager.x10.mx/";
@@ -45,7 +46,7 @@ public class BackgroundProcess {
 		 String URL = domain + "authentication_page.php";
 	
 		try {
-			System.out.println("reached the background class with  value of " + domain);
+			System.out.println("reached the background class  with   value of " + domain);
 			HttpClient client = new DefaultHttpClient();
 			HttpPost PostRequest = new HttpPost(URL);
 			List<NameValuePair> params = new ArrayList<NameValuePair>();

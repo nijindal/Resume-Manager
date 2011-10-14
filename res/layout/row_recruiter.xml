@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-	 		android:layout_width="fill_parent" 
-			android:layout_height="fill_parent">
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			android:id="@+id/header"
  			android:orientation="vertical" 
@@ -13,9 +8,8 @@
 <ImageView android:id="@+id/Logo_list" 
 			android:layout_width="wrap_content" 
 		    android:layout_height="wrap_content"
-		    android:src="@drawable/s"
-		    android:paddingLeft="3px"
-		    android:paddingTop="3px">
+		    android:paddingLeft="3dip"
+		    android:paddingTop="15dip">
 </ImageView>	
 
 <TextView android:id="@+id/rec_name"
@@ -23,31 +17,38 @@
     		android:layout_height="wrap_content"
 			android:gravity="left"
 		    android:textStyle="bold"
+		    android:textColor="#ffcccccc"
 		    android:layout_toRightOf="@+id/Logo_list"
-    		android:paddingLeft="5px"
-    		android:paddingTop="3px"
-    		android:textSize="17.5sp">
+    		android:paddingLeft="5dip"
+    		android:paddingTop="10dip"
+    		android:textSize="25dip">
 </TextView>  
 
 <TextView android:id="@+id/date_rec"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 			android:layout_alignParentRight="true"
-			android:paddingTop="3px"
-	    	android:textSize="15sp"/>
+			android:textColor="#ffcccccc"
+			android:paddingTop="3dip"
+	    	android:textSize="12dip"/>
 
 <TextView android:id="@+id/branches_be"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="B.TECH"/>
         
 <TextView android:id="@+id/branches_me"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="M.TECH"/>
 
 <TextView android:id="@+id/branches_intern"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="Intern"/>
      
 
 </RelativeLayout>
-</ScrollView>

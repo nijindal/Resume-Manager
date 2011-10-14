@@ -13,16 +13,17 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:textStyle="bold"
-	    android:textColor="#ff444444"
-	    android:textSize="17.5sp">
+	    android:textColor="#ffcccccc"
+	    android:textSize="20dip">
 </TextView>  
 
 <TextView android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-    	android:textSize="10sp"
-    	android:paddingRight="3px"
+    	android:textSize="12.5dip"
+    	android:textColor="#ff888888"
+    	android:paddingRight="4dip"
         android:gravity="right"/>
 
 <TextView android:id="@+id/time"
@@ -30,22 +31,26 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/date"
         android:layout_alignParentRight="true"
-        android:textSize="10sp"
-        android:paddingRight="3px"
+        android:textColor="#ff888888"
+        android:textSize="12.5dip"
+        android:paddingRight="4dip"
         android:gravity="right"/>
 
 <TextView android:id="@+id/body"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:textSize="15sp"
+	    android:textSize="17dip"
+	    android:textColor="#ff888888"
+	    android:paddingRight="4dip"
 	    android:layout_below="@id/time"/>
 
 <TextView android:id="@+id/user"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:textSize="15sp"
+	    android:textSize="15dip"
+	    android:textColor="#ff888888"
 	    android:layout_below="@id/body"
-	    android:paddingRight="3px"
+	    android:paddingRight="4dip"
 	    android:gravity="right"/>
 
 </RelativeLayout>

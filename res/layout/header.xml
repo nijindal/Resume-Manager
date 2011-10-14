@@ -14,28 +14,38 @@
 <ImageView android:id="@+id/Logo" 
 		 android:layout_width="wrap_content" 
 		 android:layout_height="wrap_content"
-		 android:paddingTop="3px"
-		 android:paddingLeft="3px"
-		 android:src="@drawable/s"
-		 android:padding="8dp">
+		 android:paddingTop="3dip"
+		 android:paddingLeft="3dip"
+		 android:padding="8dip">
 </ImageView>	
  	
 <TextView android:id="@+id/recruiter"
     android:layout_width="fill_parent"
-    android:layout_height="50px"
+    android:layout_height="50dip"
 	android:gravity="left"
     android:textStyle="bold"
-    android:paddingTop="15px"
-    android:paddingLeft="5px"
+    android:paddingTop="15dip"
+    android:paddingLeft="5dip"
     android:layout_toRightOf="@+id/Logo"
-    android:textSize="25sp"
-    android:text="Directi"/>
+    android:textSize="25dip"/>
 
+<ProgressBar    android:id="@+id/progressbar_rec_det"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:maxHeight="20dip"
+        android:minHeight="20dip"
+        android:maxWidth="20dip"
+        android:minWidth="20dip"
+        android:visibility="visible"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/recruiter"
+        android:paddingRight="3dip"/> 
 </RelativeLayout>
 
 <View android:layout_width="fill_parent"
 	  android:layout_height="0.25px"
-	  android:background="#ffffffff">
+	  android:background="#ff444444">
 </View> 
     
 <TextView android:id="@+id/Description"
@@ -49,25 +59,26 @@
     
 <TextView android:id="@+id/rec_desc"
     android:layout_width="fill_parent"
-    android:layout_height="20px"
+    android:layout_height="19dip"
 	android:gravity="left"
 	android:clickable="true"
 	android:onClick="onClick"
-    android:textSize="12.5px"/>	
+	android:text="Downloading Description.....please wait"
+    android:textSize="15dip"/>	
 
 <View android:layout_width="fill_parent"
-	  android:layout_height="0.25px"
-	  android:background="#ffffffff">
+	  android:layout_height="0.25dip"
+	  android:background="#ff444444">
 </View> 
 
 <TextView android:id="@+id/visiting_on"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
 	android:gravity="left"
-	android:layout_marginBottom="3px"
-	android:layout_marginTop="3px"
-	android:textSize="17.5px"
-    android:text="Visitng On"></TextView>
+	android:layout_marginBottom="3dip"
+	android:layout_marginTop="3dip"
+	android:textSize="17.5dip"
+    android:text="Visiting On"></TextView>
 
 <TextView android:id="@+id/visiting_date"
     android:layout_width="fill_parent"
@@ -75,20 +86,20 @@
 	android:gravity="left"
 	android:clickable="true"
 	android:onClick="onClick"
-    android:textSize="12.5px"></TextView>
+    android:textSize="15dip"></TextView>
 
 <View android:layout_width="fill_parent"
-	  android:layout_height="0.25px"
-	  android:background="#ffffffff">
+	  android:layout_height="0.25dip"
+	  android:background="#ff444444">
 </View> 
 
 <TextView android:id="@+id/eligibility"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
 	android:gravity="left"
-	android:layout_marginBottom="3px"
-	android:layout_marginTop="3px"
-    android:textSize="17.5px"
+	android:layout_marginBottom="3dip"
+	android:layout_marginTop="3dip"
+    android:textSize="17.5dip"
     android:text="Eligibility"></TextView>
 </LinearLayout>
      	

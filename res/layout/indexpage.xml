@@ -1,34 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
- <LinearLayout
+<LinearLayout
    xmlns:android="http://schemas.android.com/apk/res/android"
    android:orientation="vertical"
    android:layout_width="fill_parent"
+   android:background="#0A0A0A"
    android:layout_height="fill_parent">
- 
-<TextView android:text="Resume Manager"
-		android:id="@+id/rm"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:textSize="16sp"
-		android:textStyle="bold">
-</TextView> 
 
-<View android:layout_width="fill_parent"
-	  android:layout_height="2dp"
-	  android:background="#111111">
-</View>
- 
-<View android:layout_width="fill_parent"
-	  android:layout_height="20dp"
-	  android:background="#000000">
-</View>
-  
+
+<RelativeLayout android:layout_width="fill_parent"
+				android:background="@drawable/background"
+   				android:layout_height="40dip">    
+
+<TextView android:id="@+id/rm_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+	android:layout_centerVertical="true"
+    android:textColor="#FFFFFF"
+    android:textStyle="bold"
+    android:textSize="17.5dip"
+    android:text="Resume Manager"></TextView>
+
+</RelativeLayout>    
+     
+
+      
 <EditText    android:id="@+id/txt_username"
 		     android:hint="UserID"
              android:layout_height="wrap_content"
-             android:padding="10dp"
-             android:layout_width="150px"
+  			 android:layout_marginTop="30dip"
+             android:padding="10dip"
+             android:layout_width="150dip"
              android:layout_gravity="center"
              android:singleLine="true" />
              
@@ -37,7 +39,7 @@
              android:password="true"
              android:padding="10dp"
              android:layout_height="wrap_content"
-             android:layout_width="150px"
+             android:layout_width="150dip"
              android:layout_gravity="center"
              android:singleLine="true" />
    
