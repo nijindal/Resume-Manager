@@ -6,6 +6,7 @@ import java.util.HashMap;
 import android.app.ExpandableListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,7 +46,7 @@ public class Recruiter_detail extends ExpandableListActivity {
 		MyParcelable old_data = data.getParcelable("old_data");
 		Log.d(old_data.com_id,old_data.cutoff);
 		fetchandshow(old_data);
-		
+//		refresh_data();
 	}
 	
 	public void fetchandshow(MyParcelable oldData){
@@ -64,9 +65,7 @@ public class Recruiter_detail extends ExpandableListActivity {
 		all_details.ctc = oldData.ctc;
 		all_details.can_apply = "no";
 		set_data_onview();
-		Retrieve_data get_data = new Retrieve_data();
-		get_data.execute();
-		progress.setVisibility(View.INVISIBLE);
+
 		
 	}
 	
@@ -91,7 +90,7 @@ public class Recruiter_detail extends ExpandableListActivity {
 	}
 	
 	void put_branches(){
-
+		
 		groups.clear();
 		children.clear();
 		
@@ -136,10 +135,37 @@ public class Recruiter_detail extends ExpandableListActivity {
 			}		
 			children.add(temp);
 		}
+		
+		if(all_details.branches_intern.length()!=0)
+		{
+
+			HashMap m = new HashMap();
+			ArrayList temp = new ArrayList();
+			m.put("groups","Intern");
+			groups.add(m);
+			char[] branches = null;
+			branches = all_details.branches_intern.toCharArray();
+			for(int i=0;i<branches.length;i++)	
+			{
+					if(branches[i] == '1'){
+					Log.d(MyCustomRecruitCursor.BE_branches[i],"doing test");
+					m = new HashMap();
+					m.put("children",MyCustomRecruitCursor.BE_branches[i]);
+					temp.add(m);
+					}
+			}		
+			children.add(temp);
+		}
 	}
 	
 	void refresh_data(){
-
+		
+		Retrieve_data get_data = new Retrieve_data();
+		get_data.execute();
+		progress.setVisibility(View.INVISIBLE);	
+	}
+	
+	void put_refresh_data(){
 		put_branches();
 		
 		RelativeLayout layout =  (RelativeLayout)footer.findViewById(R.id.button_rel);
@@ -251,8 +277,10 @@ public class Recruiter_detail extends ExpandableListActivity {
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			
-			all_details = BackgroundProcess.get_recruiter_details(10);
+			SharedPreferences myPrefs = Recruiter_detail.this.getSharedPreferences("unique_user_id", MODE_WORLD_READABLE);
+			int user_id = myPrefs.getInt("user_id",-1);
+			Log.d("so the   found user id is:  ",new Integer(user_id).toString());
+			all_details = BackgroundProcess.get_recruiter_details(user_id);
 			return null;
 		}
 
@@ -260,7 +288,7 @@ public class Recruiter_detail extends ExpandableListActivity {
 			super.onPostExecute(result);
 			Log.d("in post_execute " + all_details.com_name,all_details.visit_date);
 			System.out.print(all_details);
-			refresh_data();
+			put_refresh_data();
 
 			
 		}

@@ -1,8 +1,10 @@
 package com.ResumeManager;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +13,6 @@ import android.widget.EditText;
 
 
 public class ResumeManagerActivity extends Activity {
-	/** Called when the activity is first created. */
 
 	private ProgressDialog pleasewait;
 	private String username = null;
@@ -39,27 +40,43 @@ public class ResumeManagerActivity extends Activity {
 		authentic_var.execute();
 	}
 
+	
+	public void BuildAlertDialog(){
+		AlertDialog.Builder builder = new AlertDialog.Builder(ResumeManagerActivity.this);
+		builder.setMessage("Login Failed try again");
+		AlertDialog alertDialog = builder.create();
+		alertDialog.show();
+	}
+	
 	private class PerformAsync extends AsyncTask<Void, Void, Void> {
 
-		String response;
+		int unique_id;
 		@Override
 		protected Void doInBackground(Void... params) {
 			System.out.println("in the Async  doInBckground");
-			response = BackgroundProcess.makeConnection(username, password);
+			unique_id = BackgroundProcess.makeConnection(username, password);
 			return null;
 		}
 
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
-			if(response.equals("SUCCESS"))		//autheticated
-				System.out.println( "in post execute" + response);
-			Intent Announcement = new Intent();
-			Announcement.setClassName("com.ResumeManager","com.ResumeManager.AnnouncementsPage");
-//			Announcement.putStringArrayListExtra("announcements", output);
-			pleasewait.dismiss();
-			startActivity(Announcement);
-			
-		}
-
+			if(unique_id>0)		//autheticated
+			{
+				System.out.println( "in post execute" + unique_id);
+				SharedPreferences myPrefs = ResumeManagerActivity.this.getSharedPreferences("unique_user_id", MODE_WORLD_READABLE);				
+				SharedPreferences.Editor prefsEditor = myPrefs.edit();
+				prefsEditor.putInt("user_id", unique_id);
+				prefsEditor.commit();
+//we have put the value of unique iser id so obtained in shared pref ...will be used in case of Recruiter_details
+				
+				Intent Announcement = new Intent();
+				Announcement.setClassName("com.ResumeManager","com.ResumeManager.AnnouncementsPage");
+				pleasewait.dismiss();
+				startActivity(Announcement);
+			}
+			else 
+				BuildAlertDialog();
+				
 	}
+}
 }

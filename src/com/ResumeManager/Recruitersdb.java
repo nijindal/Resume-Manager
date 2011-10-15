@@ -60,6 +60,12 @@ public class Recruitersdb extends SQLiteOpenHelper {
         onCreate(db);			
 	}
 	
+public void update_last_rec(int last_id)
+{
+	if(Recruiters.last_recruiter<last_id)
+		Recruiters.last_recruiter = last_id;
+}
+	
 public void add_new_to_db(){
 	
 		Log.d("Recruitersdb ","addtodb");
@@ -76,6 +82,7 @@ public void add_new_to_db(){
 				Log.d("the value of temp.branches_me is" + temp.branches_me,"NULL Value has been received");
 			
 			content.put(identity, temp.id);
+			update_last_rec(temp.id);
 			content.put(rec_name,temp.rec_name);
 			content.put(date,temp.date);
 			content.put(grade,temp.grade);

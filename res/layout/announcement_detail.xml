@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    
+<TextView	android:id="@+id/announcement_title"   
+	android:layout_width="fill_parent"
+	android:background="@drawable/background"
+	android:layout_height = "50dip"    
+    android:textColor="#ffcccccc"
+    android:textSize="25dip"
+    android:textStyle="bold"
+    android:paddingLeft="10dip"
+    android:layout_centerVertical="true"
+    android:text="Announcement_title"></TextView>
+    
+<TextView android:id="@+id/body_announce"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:textSize="20dip"
+	    android:text="Body oOF Announcement"
+	    android:textColor="#ff888888"
+	    android:paddingRight="4dip"/>    
+
+<TextView android:id="@+id/datetime_announce"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:textSize="15dip"
+	    android:text="Date And time"
+	    android:textColor="#ff888888"
+	    android:paddingRight="4dip"/>
+	    
+<TextView android:id="@+id/user_announce"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:textSize="15dip"
+	    android:text="By USERNAME"
+	    android:textColor="#ff888888"
+	    android:paddingRight="4dip"/>  	          
+    
+</LinearLayout>    

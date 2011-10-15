@@ -24,7 +24,8 @@ public class AnnouncementsPage extends ListActivity {
 	public ArrayList<String> Announcements;
 	public ArrayList<info> structured_Announcements = new ArrayList<info>();
 	ArrayList<Announce> announce_list = null;
-	public static int number_of_announcements=0;
+//	public static int number_of_announcements=0;
+	public static int last_annnouncement=0;
 	ProgressBar progress_bar = null;
 	ImageView refresh_button = null;
 
@@ -48,6 +49,9 @@ public class AnnouncementsPage extends ListActivity {
 		progress_bar.setVisibility(View.VISIBLE);
 		(new Retrieve_Announcements()).execute();
 		Log.d("announcementpage","refresh list");
+//Need to check whether the old announcements are still there in the database or not. Make a separate Activity that 
+// will be called after refreshing and it will take all the announcements identity in the database and look for their
+// availability in the server database....and delete some of the if reqd in my local db. 
 	}
 	
 	@Override
@@ -98,16 +102,25 @@ public class AnnouncementsPage extends ListActivity {
 		Cursor data_db = announce_db.fetch_all();
 		Log.d("fetch and show","afterwards");
         startManagingCursor(data_db);
-        number_of_announcements = data_db.getCount();
 		Log.d(new Integer(data_db.getCount()).toString(), new Integer(data_db.getColumnCount()).toString());
+
 		String[] from = new String[] {Anouncementsdb.com_name,Anouncementsdb.date,Anouncementsdb.time,Anouncementsdb.body,Anouncementsdb.user};
-        int[] to = new int[] { R.id.com_name, R.id.date, R.id.time, R.id.body, R.id.user};
-//the above two arrays are used for mapping.   .........
-        Log.d("fetch and show","checking for visibility thing");
+		
+		int[] to = new int[] { R.id.com_name, R.id.date, R.id.time, R.id.body, R.id.user};
+		//the above two arrays are used for mapping.   .........
+		
         progress_bar.setVisibility(View.INVISIBLE);
+        Log.d("ID OF LAST ANNOUNCEMENT IS : ", new Integer(last_annnouncement).toString());
         SimpleCursorAdapter adapter = new MyCustomAnnounceCursorAdap(this, R.layout.row_announce,data_db,from,to);
         
         setListAdapter(adapter);
+        
+//will be zero initially        
+        if(data_db.getCount() != 0)
+        {
+		verify_database verify_var = new verify_database();
+		verify_var.execute();
+		}
 	}
 	
 	//Structure the data present in the string arraylist to the arraylist<info>, where info class provides the structure
@@ -124,10 +137,10 @@ public class AnnouncementsPage extends ListActivity {
 	{
 		@Override
 		protected Void doInBackground(Void... params) {
-			Log.d("in background","Annnouncememnts retrieval"+number_of_announcements);
-			announce_list = BackgroundProcess.Announcements_data(number_of_announcements);
-			if(announce_list!=null)
-			number_of_announcements+=announce_list.size();
+//			Log.d("in background","Annnouncememnts retrieval"+number_of_announcements);
+			announce_list = BackgroundProcess.Announcements_data(last_annnouncement);
+//			if(announce_list!=null)
+//			number_of_announcements+=announce_list.size();
 			return null;
 		}
 		
@@ -143,7 +156,7 @@ public class AnnouncementsPage extends ListActivity {
 			else
 			{
 				Log.d("Announcemnts pAge.","it came out to be null");
-				progress_bar.setVisibility(1);
+				progress_bar.setVisibility(View.VISIBLE);
 			}
 		}
 	}

@@ -16,7 +16,8 @@ import android.widget.ProgressBar;
 
 public class Recruiters extends ListActivity {
 
-	public static int number_of_recruiters=0;
+//	public static int number_of_recruiters=0;
+	public static int last_recruiter = 0;
 	Recruitersdb recruiters_db = null;
 	public ArrayList<String> recruiters = new ArrayList<String>();
 	private ArrayList<Recruiter_struct> recruiters_list = new ArrayList<Recruiter_struct>();
@@ -78,6 +79,7 @@ public class Recruiters extends ListActivity {
 		Log.d("fetch and show","recruiters");
 		startManagingCursor(data_db);
   
+		
 		String[] from = new String[] {Recruitersdb.identity, Recruitersdb.grade,Recruitersdb.rec_name,Recruitersdb.date,
 				Recruitersdb.branches_be,Recruitersdb.pkg_be, Recruitersdb.cutoff_be,
 				Recruitersdb.branches_me,Recruitersdb.pkg_me, Recruitersdb.cutoff_me,
@@ -85,6 +87,7 @@ public class Recruiters extends ListActivity {
 
 		int[] to = new int[] {R.id.rec_name, R.id.date_rec, R.id.branches_be, R.id.branches_me, R.id.branches_intern};
 
+		Log.d("ID OF LAST ANNOUNCEMENT IS : ", new Integer(last_recruiter).toString());
 		progress_bar.setVisibility(View.INVISIBLE);
 		MyCustomRecruitCursor adapter = new MyCustomRecruitCursor(this, R.layout.row_recruiter,data_db,from,to);
 		setListAdapter(adapter);
@@ -96,7 +99,6 @@ public class Recruiters extends ListActivity {
 		recruiters_db = new Recruitersdb(this, recruiters_list);
 		recruiters_db.add_new_to_db();
 		fetchandshow();
-		
 	}	
 	
 	private class Retrieve_recruiters extends AsyncTask<Void,Void,Void>{
@@ -105,9 +107,9 @@ public class Recruiters extends ListActivity {
 		@Override
 		protected Void doInBackground(Void... params) {
 			Log.d("in background","recruiters");
-			recruiters_list = BackgroundProcess.Recruiters_data();
-			if(recruiters_list!=null)
-				number_of_recruiters += recruiters_list.size();
+			recruiters_list = BackgroundProcess.Recruiters_data(last_recruiter);
+//			if(recruiters_list!=null)
+//				number_of_recruiters += recruiters_list.size();
 			return null;
 		}
 		

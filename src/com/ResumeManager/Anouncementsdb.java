@@ -26,7 +26,7 @@ public class Anouncementsdb extends SQLiteOpenHelper{
 	private Context ctx;
 	public static SQLiteDatabase db;
 	
-	public static String query = "SELECT _id, company, date, time, body, user FROM announcement_table order by identity DESC";
+	public static String query = "SELECT _id, identity, company, date, time, body, user FROM announcement_table order by identity DESC";
 	
 	public String CREATE_TABLE_ANNOUNCE = "CREATE TABLE "+ announcement_table + " ( _id INTEGER PRIMARY KEY AUTOINCREMENT, " + identity + " INTEGER, " +com_name + " TEXT NOT NULL," +
 	date + " TEXT NOT NULL," + time + " TEXT NOT NULL," + body + " TEXT NOT NULL," + user +" TEXT NOT NULL);";
@@ -70,6 +70,14 @@ public Anouncementsdb(Context context, ArrayList<Announce> new_announcements){
 		db.execSQL("DROP TABLE IF EXISTS announce_table;");
         onCreate(db);		
 	}
+	
+	
+	public void update_last_id(int rcvd_id){
+		if(AnnouncementsPage.last_annnouncement<rcvd_id){
+			AnnouncementsPage.last_annnouncement = rcvd_id;
+			Log.d("updated the value of last announcement", new Integer(rcvd_id).toString());
+			}
+	}
 
 	public void add_new_to_db(){
 		
@@ -82,7 +90,8 @@ public Anouncementsdb(Context context, ArrayList<Announce> new_announcements){
 		while(Iter.hasNext()){
 			temp = Iter.next();
 			ContentValues content = new ContentValues();
-			content.put(identity, (Integer.parseInt(temp.id)));
+			content.put(identity, temp.id);
+			update_last_id(temp.id);
 			Log.d("add new to db","the iteraation loop");
 			content.put(com_name,temp.com_name);
 			content.put(date,temp.date);
@@ -99,8 +108,6 @@ public Anouncementsdb(Context context, ArrayList<Announce> new_announcements){
 	public Cursor fetch_all(){
 		db = this.getWritableDatabase();
 		Log.d("fetch all","announcementdb");
-//		return db.query(announcement_table, new String[]{unique_id,com_name,date,time,body,user}, null,null,null,null,unique_id+"DESC");
-//		Cursor cursor =  db.query(announcement_table, new String[]{unique_id,com_name,date,time,body,user}, null,null,null,null,null);
 		Cursor cursor=null;
 		if(db!=null)
 		cursor = db.rawQuery(query, null);

@@ -36,13 +36,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:text="B.TECH"/>
+        android:text="B.Tech"/>
         
 <TextView android:id="@+id/branches_me"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:text="M.TECH"/>
+        android:text="M.Tech"/>
 
 <TextView android:id="@+id/branches_intern"
         android:layout_width="wrap_content"

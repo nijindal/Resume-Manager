@@ -38,8 +38,9 @@ public class MyCustomRecruitCursor extends SimpleCursorAdapter {
 								 		"Mechanical",		
 								 		"Polymer Science and Chemical Technology",		
 								 		"Production",		
-										"Polymer Science and Chemical Technology"
-	 									};
+										};
+	
+	
 	
 	final static public String[] ME_branches = {
 										"BioInformatics",
@@ -100,6 +101,8 @@ public class MyCustomRecruitCursor extends SimpleCursorAdapter {
 		data.pkg_intern = cursor.getString(cursor.getColumnIndex(from[11]));
 		data.cutoff_intern = cursor.getString(cursor.getColumnIndex(from[12]));
 		
+//		Log.d("Branches Intern",data.branches_be);
+		
 		boundry = new RelativeLayout(context);
 
 		boundry = (RelativeLayout) view.findViewById(R.id.header);
@@ -156,6 +159,8 @@ public class MyCustomRecruitCursor extends SimpleCursorAdapter {
 			bundle.grade_icon.setImageResource(R.drawable.aplus);
 		else if(data.grade.equals("A"))
 			bundle.grade_icon.setImageResource(R.drawable.a);
+		
+		Log.d("Branches Intern",data.branches_intern);
 		addTextviews();
 		
 	}
@@ -214,10 +219,12 @@ public void addTextviews(){
 
 		params.addRule(RelativeLayout.BELOW, R.id.rec_name);
 		
+		bundle.branches_intern.setVisibility(View.VISIBLE);		
 		bundle.branches_intern.setLayoutParams(params);
-		bundle.branches_intern.setText("INTERN");
 		bundle.branches_intern.setTextSize(20);
 		bundle.branches_intern.setPadding(10, 0, 0, 0);
+		makeDialog(bundle.branches_intern);
+
 	}
 }	
 	
@@ -228,12 +235,13 @@ public void makeDialog(TextView view_received){
 		view_received.setClickable(true);
 		final TextView view = view_received;
 
+		Log.d("pkg is " + data.pkg_be, "Branches BE is "+ data.branches_be);
 		view.setOnClickListener(new save_data(data,view));
 	}
 
 private class save_data implements OnClickListener {
 
-	Recruiter_struct com_data;
+	private Recruiter_struct com_data;
 	TextView t_view;
 	public save_data(Recruiter_struct data, TextView view) {
 			com_data = data;
@@ -243,8 +251,8 @@ private class save_data implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		
-		Log.d("custom adapter","on click");
-		
+		Log.d("custom adapter","on   click");
+		Log.d("pkg is " + com_data.pkg_be, "Branches BE is "+ com_data.branches_be);	
 		String[] items = fillDialogItems(t_view,com_data);
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
@@ -260,6 +268,7 @@ private class save_data implements OnClickListener {
 	
 }
 
+
 	public String[] fillDialogItems(TextView view,Recruiter_struct com_data){
 		
 		char[] branches = null;
@@ -268,7 +277,7 @@ private class save_data implements OnClickListener {
 		ArrayList<String> eligibile_list = new ArrayList<String>(); 
 		if(view.getText().equals("B.Tech"))
 		{
-//				branches = data.branches_be.toCharArray();
+				Log.d("FILL DIALOG ITEMS pkg is " + com_data.pkg_be, "Branches BE is "+ com_data.branches_be);	
 				branches = com_data.branches_be.toCharArray();
 				eligibile_list.add("pkg: " + com_data.pkg_be + " LPA");
 				eligibile_list.add("cutoff: " + com_data.cutoff_be);
@@ -281,7 +290,6 @@ private class save_data implements OnClickListener {
 		else if(view.getText().equals("M.Tech"))
 		{
 			Log.d("in  else","this one is for M.Tech" + com_data.pkg_me + " Branches" + com_data.branches_me );
-//			branches = data.branches_me.toCharArray();
 			branches = com_data.branches_me.toCharArray();
 			eligibile_list.add("pkg: " + com_data.pkg_me);
 			eligibile_list.add("cutoff: " + com_data.cutoff_me);
@@ -290,6 +298,20 @@ private class save_data implements OnClickListener {
 			{
 				if(branches[i] == '1')
 					eligibile_list.add(ME_branches[i]);
+			}
+		}
+		
+		else if(view.getText().equals("Intern"))
+		{
+			Log.d("in  else","this one is for Intern" + com_data.pkg_intern + " Branches" + com_data.branches_intern );
+			branches = com_data.branches_intern.toCharArray();
+			eligibile_list.add("pkg: " + com_data.pkg_intern);
+			eligibile_list.add("cutoff: " + com_data.cutoff_intern);
+			
+			for(i=0;i<branches.length;i++)	
+			{
+				if(branches[i] == '1')
+					eligibile_list.add(BE_branches[i]);
 			}
 		}
 		

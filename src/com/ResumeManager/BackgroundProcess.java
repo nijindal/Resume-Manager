@@ -32,7 +32,7 @@ public class BackgroundProcess {
 //	static String domain = "http://resumemanager.x10.mx/";
 	static String domain = "http://10.42.43.1/Android/";
 	
-	public static String makeConnection(String username, String password) {
+	public static int makeConnection(String username, String password) {
 		
 		
 		 HttpParams httpParameters = new BasicHttpParams();
@@ -61,7 +61,7 @@ public class BackgroundProcess {
 																	// established
 																	// actuallly....
 			int Response_code = ResponsePost.getStatusLine().getStatusCode();
-			Log.d("after the authetication",new Integer(Response_code).toString());
+			Log.d("after  the authetication",new Integer(Response_code).toString());
 			System.out.println("After the request" + Response_code);
 
 			if (Response_code == HttpStatus.SC_OK) 
@@ -81,20 +81,20 @@ public class BackgroundProcess {
 					in.close();
 					String Auth_response = new String(); 
 					Auth_response = result.toString();
-					return Auth_response;
+					return Integer.parseInt(Auth_response);
 				}
-				return null;
+				return -1;
 			 } 
 		  else
 			{
 				result[0] = "server_error";
-				return null;
+				return -1;
 			}
 		}catch (Exception e) {
 			result[0] = "Error";
 			e.printStackTrace();
 		}
-		return null;
+		return -1;
 		
 }
 	
@@ -163,7 +163,7 @@ public static ArrayList<Announce> Announcements_data(int number){
 		return null;
 }
 	
-public static ArrayList<Recruiter_struct> Recruiters_data(){
+public static ArrayList<Recruiter_struct> Recruiters_data(int number){
 		
 		String URL;
 		URL = domain + "recruiters_list.php";
@@ -175,6 +175,12 @@ public static ArrayList<Recruiter_struct> Recruiters_data(){
 			System.out.println("reached the background class of recruiters");
 			HttpClient client = new DefaultHttpClient();
 			HttpPost PostRequest = new HttpPost(URL);
+			
+			List<NameValuePair> params = new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("number",new Integer(number).toString()));
+			UrlEncodedFormEntity ent = new UrlEncodedFormEntity(params);
+			PostRequest.setEntity(ent);
+			
 			HttpResponse ResponsePost = client.execute(PostRequest);// connection established actuallly....
 			int Response_code = ResponsePost.getStatusLine().getStatusCode();
 			System.out.println("In recruiters Data" + Response_code);
