@@ -3,6 +3,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,12 +72,15 @@ public class MyCustomAnnounceCursorAdap extends SimpleCursorAdapter {
 		bundle.body = (TextView)view.findViewById(to[3]);
 		bundle.user = (TextView)view.findViewById(to[4]);
 	
-
-		
 		setViewText(bundle.com_name, data.com_name);
 		setViewText(bundle.date, data.date);
 		setViewText(bundle.time,data.time);
-		setViewText(bundle.body,data.body);
+		
+		String temp = Html.fromHtml(data.body).toString();
+
+		bundle.body.setText(Html.fromHtml(Html.fromHtml(data.body).toString()));
+
+		bundle.body.setMovementMethod(LinkMovementMethod.getInstance());
 		setViewText(bundle.user,data.user);
 	
 	}

@@ -7,9 +7,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class ResumeManagerActivity extends Activity {
@@ -23,6 +26,9 @@ public class ResumeManagerActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.indexpage);
 	
+
+
+		
 		Log.d("in oncreate", "process started");
 		
 		Log.d("after contenview", "process started");

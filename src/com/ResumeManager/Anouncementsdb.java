@@ -26,8 +26,10 @@ public class Anouncementsdb extends SQLiteOpenHelper{
 	private Context ctx;
 	public static SQLiteDatabase db;
 	
-	public static String query = "SELECT _id, identity, company, date, time, body, user FROM announcement_table order by identity DESC";
+	public static String query_fetch = "SELECT _id, identity, company, date, time, body, user FROM announcement_table order by identity DESC";
 	
+	public static String fetch_id = "SELECT _id, identity, company, date, time, body, user FROM announcement_table WHERE identity=10"; 
+	public static String query_delete = "DELETE FROM announcement_table WHERE identity=";
 	public String CREATE_TABLE_ANNOUNCE = "CREATE TABLE "+ announcement_table + " ( _id INTEGER PRIMARY KEY AUTOINCREMENT, " + identity + " INTEGER, " +com_name + " TEXT NOT NULL," +
 	date + " TEXT NOT NULL," + time + " TEXT NOT NULL," + body + " TEXT NOT NULL," + user +" TEXT NOT NULL);";
 	
@@ -110,7 +112,7 @@ public Anouncementsdb(Context context, ArrayList<Announce> new_announcements){
 		Log.d("fetch all","announcementdb");
 		Cursor cursor=null;
 		if(db!=null)
-		cursor = db.rawQuery(query, null);
+		cursor = db.rawQuery(query_fetch, null);
 		
 //we must have an column called _id in the table if you want to use cursor adapter on the given database and that
 //_id should be unique i.e., primary key ...and auto increment 		
@@ -124,5 +126,15 @@ public Anouncementsdb(Context context, ArrayList<Announce> new_announcements){
         else
         	Log.d("fetch all","NULLL");
 		return null;
+	}
+	
+	public void delete_row_by_id(int local) {
+
+		Log.d("Delete row by iD","In announcements DB");
+		db = this.getWritableDatabase();
+		Cursor c = db.rawQuery(query_delete+local, null);
+//		Cursor c = db.rawQuery(fetch_id, null);
+		c.moveToFirst();
+		Log.d("The count is:  " , new Integer(c.getCount()).toString());
 	}
 }
