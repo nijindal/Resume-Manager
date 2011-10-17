@@ -76,7 +76,7 @@ public class ResumeManagerActivity extends Activity {
 //we have put the value of unique iser id so obtained in shared pref ...will be used in case of Recruiter_details
 				
 				Intent Announcement = new Intent();
-				Announcement.setClassName("com.ResumeManager","com.ResumeManager.AnnouncementsPage");
+				Announcement.setClassName("com.ResumeManager","com.ResumeManager.Announcements_Page");
 				pleasewait.dismiss();
 				startActivity(Announcement);
 			}

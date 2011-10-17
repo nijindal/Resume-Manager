@@ -14,7 +14,7 @@
 <ImageView android:id="@+id/Logo" 
 		 android:layout_width="wrap_content" 
 		 android:layout_height="wrap_content"
-		 android:paddingTop="3dip"
+		 android:layout_centerVertical="true"
 		 android:paddingLeft="3dip"
 		 android:padding="8dip">
 </ImageView>	
@@ -24,7 +24,7 @@
     android:layout_height="50dip"
 	android:gravity="left"
     android:textStyle="bold"
-    android:paddingTop="15dip"
+	android:layout_centerVertical="true"
     android:paddingLeft="5dip"
     android:layout_toRightOf="@+id/Logo"
     android:textSize="25dip"/>
@@ -62,7 +62,6 @@
     android:layout_height="19dip"
 	android:gravity="left"
 	android:clickable="true"
-	android:onClick="onClick"
 	android:text="Downloading Description.....please wait"
     android:textSize="15dip"/>	
 

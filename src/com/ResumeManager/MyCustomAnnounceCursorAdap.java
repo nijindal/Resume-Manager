@@ -35,7 +35,7 @@ public class MyCustomAnnounceCursorAdap extends SimpleCursorAdapter {
 		
 		Log.d("custom","bind view");
 		ViewBundle bundle = new ViewBundle();
-		Announce data = new Announce();
+		Announcement_struct data = new Announcement_struct();
 		
 		RelativeLayout layout =  (RelativeLayout)view.findViewById(R.id.relative_announce);
 		layout.setClickable(true);
@@ -53,14 +53,16 @@ public class MyCustomAnnounceCursorAdap extends SimpleCursorAdapter {
 		data_collect.putString("time", data.time);
 		data_collect.putString("user", data.user);
 		
+		layout.setTag(data_collect);
 		
 		layout.setOnClickListener(new View.OnClickListener(){
 			
 			@Override
 			public void onClick(View v) {
-
+			Log.d("in Announcement cursor","on click");
+			Bundle b = (Bundle) v.getTag();
 			Intent to_details = new Intent();
-			to_details.putExtras(data_collect);
+			to_details.putExtras(b);
 			to_details.setClassName("com.ResumeManager", "com.ResumeManager.Announcement_detail");
 			ctx.startActivity(to_details);
 		}

@@ -17,7 +17,7 @@
         </intent-filter>    
         </activity>
         
-        <activity android:name=".AnnouncementsPage"
+        <activity android:name=".Announcements_Page"
                   android:label="@string/announcements_title"
                   android:theme="@android:style/Theme.NoTitleBar">
         <intent-filter>
@@ -31,7 +31,7 @@
                   android:theme="@android:style/Theme.NoTitleBar">
         </activity>    
         
-        <activity android:name=".Recruiters"
+        <activity android:name=".Recruiters_Page"
                   android:label="@string/recruiters_title"
                   android:theme="@android:style/Theme.NoTitleBar">
         </activity>

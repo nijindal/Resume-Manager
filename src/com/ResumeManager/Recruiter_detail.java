@@ -25,7 +25,7 @@ import android.widget.RelativeLayout.LayoutParams;
 public class Recruiter_detail extends ExpandableListActivity {
 
 	ProgressDialog pleasewait;
-	private Rec_details all_details;
+	private Rec_details_struct all_details;
 	Context ctx;
 	ExpandableListView listView;
 	ArrayList groups;
@@ -46,12 +46,12 @@ public class Recruiter_detail extends ExpandableListActivity {
 		MyParcelable old_data = data.getParcelable("old_data");
 		Log.d(old_data.com_id,old_data.cutoff);
 		fetchandshow(old_data);
-//		refresh_data();
+		refresh_data();
 	}
 	
 	public void fetchandshow(MyParcelable oldData){
 		
-		all_details = new Rec_details();
+		all_details = new Rec_details_struct();
 		all_details.com_id = oldData.com_id;
 		all_details.grade = oldData.grade;
 		all_details.com_name = oldData.com_name;
@@ -90,12 +90,13 @@ public class Recruiter_detail extends ExpandableListActivity {
 	}
 	
 	void put_branches(){
-		
+		Log.d("in details","in put branches");
 		groups.clear();
 		children.clear();
 		
 		if(all_details.branches_be.length()!=0)
 		{
+
 				HashMap m = new HashMap();
 				ArrayList temp = new ArrayList();
 				m.put("groups","B.E/B.Tech");
@@ -184,7 +185,6 @@ public class Recruiter_detail extends ExpandableListActivity {
 		{
 			Log.d("Notification....","you are not eligible  for the cmpany");
 		}
-	
 
 		rec_detail_view.rec_desc.setOnClickListener(new View.OnClickListener(){
 		@Override
@@ -225,10 +225,20 @@ public class Recruiter_detail extends ExpandableListActivity {
 		rec_detail_view.ctc = (TextView) footer.findViewById(R.id.ctc_data);
 		rec_detail_view.cutoff = (TextView) footer.findViewById(R.id.cutoff_data);
 		rec_detail_view.job_desc = (TextView) footer.findViewById(R.id.job_desc_data);		
+
+		rec_detail_view.rec_desc.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View v) {
+					
+					Log.d("recruiter_detail","on click"+ v.getId());
+					change_layout(v.getId());
+			}
+				
+			});	
 		
 		progress = (ProgressBar) header.findViewById(R.id.progressbar_rec_det);
 	
-
+//For putting a photo about the cateogry......
 		if(all_details.grade.equals("S"))
 			logo.setImageResource(R.drawable.s);
 		else if(all_details.grade.equals("A+"))
@@ -236,6 +246,7 @@ public class Recruiter_detail extends ExpandableListActivity {
 		else if(all_details.grade.equals("A"))
 			logo.setImageResource(R.drawable.a);
 		
+//for expandable List adapter for branches..........
 		SimpleExpandableListAdapter expListAdapter = 
 			new SimpleExpandableListAdapter( 
 					this, 
@@ -248,8 +259,8 @@ public class Recruiter_detail extends ExpandableListActivity {
 					new String[]{"children"},
 					new int[]{R.id.tvChild}
 				);
-		
-			
+
+//Adding header and footer to the the given ExpandableList........
 		this.getExpandableListView().addHeaderView(header);
 		this.getExpandableListView().addFooterView(footer);
 		this.getExpandableListView().setAdapter(expListAdapter);
@@ -269,7 +280,6 @@ public class Recruiter_detail extends ExpandableListActivity {
 		TextView ctc;
 		TextView cutoff;
 		TextView job_desc;
-		Button sub_button;
 		
 	}
 	

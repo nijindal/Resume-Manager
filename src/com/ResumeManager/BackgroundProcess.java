@@ -99,12 +99,11 @@ public class BackgroundProcess {
 }
 	
 	
-public static ArrayList<Announce> Announcements_data(int number){
+public static ArrayList<Announcement_struct> Announcements_data(int number){
 		
 		String URL = domain + "announcements_page.php";
 		ArrayList<String> Announcements_list = new ArrayList<String>();
-		Announce_struct list;
-		ArrayList<Announce> Announcements_struct = new ArrayList<Announce>();
+		ArrayList<Announcement_struct> Announcements_struct = new ArrayList<Announcement_struct>();
 		Announcements_list.clear();
 		
 		
@@ -146,8 +145,8 @@ public static ArrayList<Announce> Announcements_data(int number){
 //TypeToken function.......
 					
 					Gson gson = new Gson();
-					Type listType = new TypeToken<ArrayList<Announce>>(){}.getType();
-					Announcements_struct = (ArrayList<Announce>) gson.fromJson(str,listType);
+					Type listType = new TypeToken<ArrayList<Announcement_struct>>(){}.getType();
+					Announcements_struct = (ArrayList<Announcement_struct>) gson.fromJson(str,listType);
 
 					return Announcements_struct;
 				}
@@ -220,10 +219,10 @@ public static ArrayList<Recruiter_struct> Recruiters_data(int number){
 		}
 
 
-static public Rec_details get_recruiter_details(int company_id){
+static public Rec_details_struct get_recruiter_details(int company_id){
 	
 	String URL = domain + "recruiter_detail.php";
-	Rec_details array;
+	Rec_details_struct array;
 	try {
 		System.out.println("reached the recruiter details background class");
 		HttpClient client = new DefaultHttpClient();
@@ -252,7 +251,7 @@ static public Rec_details get_recruiter_details(int company_id){
 				BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 				String string_rcvd = reader.readLine();
 				Gson gson = new Gson();
-				array = gson.fromJson(string_rcvd, Rec_details.class);
+				array = gson.fromJson(string_rcvd, Rec_details_struct.class);
 				if(array.com_name == "")
 					Log.d("the company name is nulll revd","checked it just now");
 				else

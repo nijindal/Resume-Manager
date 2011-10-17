@@ -13,7 +13,7 @@ public class Announcement_detail extends Activity{
 		super.onCreate(savedInstanceState);
 		Bundle data = getIntent().getExtras();
 		
-		Announce rcvd_data = new Announce(); 
+		Announcement_struct rcvd_data = new Announcement_struct(); 
 		rcvd_data.com_name = data.getString("com_name");
 		rcvd_data.date = data.getString("date");
 		rcvd_data.time = data.getString("time");
