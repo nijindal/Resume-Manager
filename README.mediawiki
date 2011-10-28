@@ -14,18 +14,18 @@
 =='''Here are some Screenshots'''==
 
 
-''Login Page''
-</br>
+===''Login Page''===
+----
 <a href="http://imgur.com/kE72s"><img src="http://i.imgur.com/kE72s.png" title="Hosted by imgur.com" /></a>
 
-''Announcements Page''
-</br>
+===''Announcements Page''===
+----
 <a href="http://imgur.com/nqlBB"><img src="http://i.imgur.com/nqlBB.png" title="Hosted by imgur.com" /></a>
 
-''Recuiters Page''
+===''Recuiters Page''===
 </br>
 <a href="http://imgur.com/gR1bX"><img src="http://i.imgur.com/gR1bX.png" title="Hosted by imgur.com" /></a>
 
-''Recruiter Details Page''
+===''Recruiter Details Page''===
 </br>
 <a href="http://imgur.com/oVjfl"><img src="http://i.imgur.com/oVjfl.png" title="Hosted by imgur.com" /></a>
