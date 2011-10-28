@@ -150,8 +150,8 @@ public class Announcements_Page extends ListActivity {
 		Log.d("announcementspage","savetodb");
 		announce_db = new Anouncements_db(this, announce_list);
 		announce_db.add_new_to_db();
-		verify_var = new verify_database();
-    	verify_var.execute();
+//		verify_var = new verify_database();
+//    	verify_var.execute();
 		fetchandshow();
 	}
 	

@@ -9,4 +9,14 @@
 * Adding push updates about any new announcement or company.
 * Pull to Refresh is also under process.
 * Currently, it is specific to portal of my college only, But I am thinking of making it generalised. So that, it can be used for any of placement portals.
-~                                            
+
+
+Here are some Screenshots:
+
+[http://i.imgur.com/s7Fu6.png]
+
+[IMG]http://i.imgur.com/s7Fu6.png[/IMG]
+
+[URL=http://imgur.com/s7Fu6][IMG]http://i.imgur.com/s7Fu6.png[/IMG][/URL]
+
+<a href="http://imgur.com/s7Fu6"><img src="http://i.imgur.com/s7Fu6.png" title="Hosted by imgur.com" /></a>
