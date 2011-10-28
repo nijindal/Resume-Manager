@@ -1,14 +1,14 @@
 Current Progress:
-It's an android app for Placement Portal of my College.
-All students in college have an Account on this portal.This app provides easy access to all live update, new 
+*It's an android app for Placement Portal of my College.
+*All students in college have an Account on this portal.This app provides easy access to all live update, new 
 companies visiting, Application Submissions etc.
 
-For this, I have written some Server-side API's which takes data in raw form from main server, encodes it in 
+*For this, I have written some Server-side API's which takes data in raw form from main server, encodes it in 
 json. This json-encoded data is sent to app, which is further decoded on device.
 
-Manual updation of comapies data and announcements. 
+*Manual updation of comapies data and announcements. 
 
-It uses Sqlite DB to store information on device, once retrieved from Server.
+*It uses Sqlite DB to store information on device, once retrieved from Server.
 
 For future:
 
