@@ -4,10 +4,10 @@
 *For this, I have written some Server-side APIs which takes data in raw form from main server, encodes it in json. This json-encoded data is sent to app, which is further decoded on device.
 *Manual updation of comapies data and announcements.
 *It uses Sqlite DB to store information on device, once retrieved from Server.
+*Push updates about any new announcement or company using Google C2DM service(Implementation Done, but source code yet to be comitted).
+*Pull to Refresh.
 
 ==''For future''==
-* Adding push updates about any new announcement or company.
-* Pull to Refresh is also under process.
 * Currently, it is specific to portal of my college only, But I am thinking of making it generalised. So that, it can be used for any of placement portals.
 
 
@@ -26,6 +26,16 @@
 </br>
 <a href="http://imgur.com/gR1bX"><img src="http://i.imgur.com/gR1bX.png" title="Hosted by imgur.com" /></a>
 
+===''B.tech, M.tech, Intern Context Menu''===
+</br>
+<a href="http://i.imgur.com/Z4gfR.png"><img src="http://i.imgur.com/Z4gfR.png" title="Hosted by imgur.com" /></a>
+
 ===''Recruiter Details Page''===
 </br>
 <a href="http://imgur.com/oVjfl"><img src="http://i.imgur.com/oVjfl.png" title="Hosted by imgur.com" /></a>
+
+===''Recruiter Description(On click)''===
+</br>
+<a href="http://i.imgur.com/BoYdq.png"><img src="http://i.imgur.com/BoYdq.png" title="Hosted by imgur.com" /></a>
+
+
